@@ -1,0 +1,225 @@
+﻿
+@{
+    ViewBag.Title = "Message";
+    Layout = "~/Views/Shared/Home.cshtml";
+}
+@*导航栏的样式*@
+<style>
+    body {
+        background-color: #F5F6F7;
+    }
+
+    .zhuti {
+        margin-top: 20px;
+        width: 100%;
+        position: relative;
+    }
+
+    .daohang {
+        background-color: white;
+        width: 150px;
+        height: 300px;
+        text-align: center;
+        font-size: 1em;
+    }
+
+    .item-ul {
+        padding: 5px;
+    }
+
+        .item-ul li {
+            line-height: 50px;
+        }
+
+            .item-ul li:hover {
+                background-color: #F5F6F7;
+            }
+
+    .active {
+        background-color: #F5F6F7;
+    }
+</style>
+@*li点击变色*@
+<script>
+    $(".item-ul").on("click", "li", function () {
+        $(".item-ul li").removeClass("active");
+        $(this).addClass("active");
+    });
+</script>
+
+@*内容页的样式*@
+<style>
+    .daohang {
+        float: left;
+        margin-right: 10px;
+        box-shadow: #bcbcbc 1px 1px 1px 1px;
+    }
+
+    #neiron {
+        width: 1050px;
+        height: 640px;
+        background-color: white;
+        /*float: left;*/
+        position: absolute;
+        left: 180px;
+        box-shadow: #bcbcbc 1px 1px 1px 1px;
+        overflow: scroll;
+        scrollbar-width: thin;
+    }
+
+
+    .innerbox {
+        overflow-x: hidden;
+        overflow-y: auto;
+        scrollbar-width: thin;
+        width: 10px;
+        height: 10px;
+    }
+
+        /*火狐滚动条样式*/
+        .innerbox::-webkit-scrollbar {
+            width: 6px;
+            background: rgba(#101F1C, 0.1);
+            -webkit-border-radius: 2em;
+            -moz-border-radius: 2em;
+            border-radius: 2em;
+        }
+
+        .innerbox::-webkit-scrollbar-thumb {
+            background-color: rgba(144,147,153,.5);
+            background-clip: padding-box;
+            min-height: 28px;
+            -webkit-border-radius: 2em;
+            -moz-border-radius: 2em;
+            border-radius: 2em;
+            transition: background-color .3s;
+            cursor: pointer;
+        }
+
+        .innerbox::-webkit-scrollbar-track {
+            background-color: rgba(144,147,153,.3);
+        }
+
+
+
+
+    /* // 美化滚动条*/
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+    }
+
+    ::-webkit-scrollbar-track {
+        width: 6px;
+        background: rgba(#101F1C, 0.1);
+        -webkit-border-radius: 2em;
+        -moz-border-radius: 2em;
+        border-radius: 2em;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: rgba(144,147,153,.5);
+        background-clip: padding-box;
+        min-height: 28px;
+        -webkit-border-radius: 2em;
+        -moz-border-radius: 2em;
+        border-radius: 2em;
+        transition: background-color .3s;
+        cursor: pointer;
+    }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: rgba(144,147,153,.3);
+        }
+
+    a {
+        width: 100px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+</style>
+
+<div id="zhuti" class="zhuti">
+    <div id="daohang" class="daohang">
+        <ul class="item-ul">
+            <li class="active">评论</li>
+            <li>赞</li>
+            <li>收藏</li>
+            <li>私信</li>
+        </ul>
+    </div>
+    <div id="neiron">
+
+    </div>
+</div>
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(function () {
+        var lisuoy = 10;
+        var d = document.getElementsByTagName('li'); // 获取所有li元素
+        //divID.innerHTML = "";
+        for (var i = 0; i < d.length; i++) {
+            d[i].index = i; // 为第i个li元素添加一个index属性，赋值为i
+            d[i].addEventListener('click', function () {
+                lisuoy = (this.index);
+                console.log(lisuoy);
+                if (lisuoy == 9) {
+                    var divID = document.getElementById("neiron");
+                    divID.innerHTML = "";
+                    $.ajax({
+                        type: "Get",
+                        url: "/Api/ApiMessage",
+                        success: function (res) {
+                            for (var j = 0; j < res.length; j++) {
+                                divID.innerHTML +=
+                                    '<div style="width:950px; height:70px; padding:5px; padding:0px auto;">'
+                                + '<span>' + '<img src="../Upload/UserImage/' + res[j].imag + '" style="border-radius:50%; height:50px;border:1px solid black" />'
+                                    + '<a href="#" style="margin-left:5px;">' + res[j].name + '</a>' + '<span style="margin-left:5px;">' + "对你进行了评论" + '</span>' + '</span>'
+                                    + ' <p style="position:relative;top:-20px;left:50px">' + "博客" + '：' + '<a href="#" title="' + res[j].title + '" style="width: 5px; overflow: auto;">' + res[j].title + '</a>' + '<span style="margin-left:5px;">' + "评论" + '：' + '</span>' + '<a href="#"  title="' + res[j].plnr + '" style="width: 10px; overflow: auto;">' + res[j].plnr + '</a>' + '</p>' +
+                                    '</div>' + '<hr/>';
+                            }
+                        }
+                    })
+                } else if (lisuoy == 10) {
+                    var divID = document.getElementById("neiron");
+                    divID.innerHTML = "";
+                    $.ajax({
+                        type: "Get",
+                        url: "/Api/ApiMessage/Like",
+                        success: function (res) {
+                            for (var j = 0; j < res.length; j++) {
+                                divID.innerHTML +=
+                                    '<div style="width:950px; height:70px; padding:5px; padding:0px auto;">'
+                                + '<span>' + '<img src="../Upload/UserImage/' + res[j].imag + '" style="border-radius:50%; height:50px;border:1px solid black" />'
+                                    + '<a href="#" style="margin-left:5px;">' + res[j].name + '</a>' + '<span style="margin-left:5px;">' + "对你进行了点赞" + '</span>' + '</span>'
+                                    + ' <p style="position:relative;top:-20px;left:50px">' + "博客" + '：' + '<a href="#" title="' + res[j].title + '" style="width: 5px; overflow: auto;">' + res[j].title + '</a>' +
+                                    '</div>' + '<hr/>';
+                            }
+                        }
+                    })
+
+                } else if (lisuoy == 11) {
+                    var divID = document.getElementById("neiron");
+                    divID.innerHTML = "";
+                    $.ajax({
+                        type: "Get",
+                        url: "/Api/ApiMessage/Favorite",
+                        success: function (res) {
+                            for (var j = 0; j < res.length; j++) {
+                                divID.innerHTML +=
+                                    '<div style="width:950px; height:70px; padding:5px; padding:0px auto;">'
+                                + '<span>' + '<img src="../Upload/UserImage/' + res[j].imag + '" style="border-radius:50%; height:50px;border:1px solid black" />'
+                                    + '<a href="#" style="margin-left:5px;">' + res[j].name + '</a>' + '<span style="margin-left:5px;">' + "对你的博客进行了收藏" + '</span>' + '</span>'
+                                    + ' <p style="position:relative;top:-20px;left:50px">' + "博客" + '：' + '<a href="#" title="' + res[j].title + '" style="width: 5px; overflow: auto;">' + res[j].title + '</a>' +
+                                    '</div>' + '<hr/>';
+                            }
+                        }
+                    })
+                } else if (lisuoy == 12) {
+                    window.location.href = "/Private/Messages";
+                }
+            });
+        }
+    });
+</script>

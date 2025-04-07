@@ -1,0 +1,179 @@
+﻿$(function () {
+    var loc = location.href;
+    var n1 = loc.length;
+    var n2 = loc.indexOf('=');
+    var str = loc.slice(n2 + 1, n1);
+    var bid = str;
+    var click;
+    $("#detail-app").empty();
+    var ZName;
+    $.ajaxSettings.async = false
+
+        $.ajax({
+            type: "Get",
+            data: { Bid: bid },
+            dataType: "json",
+            url: "/api/ApiClickAA",
+        })
+
+
+
+    $.ajax({
+        type: "Get",
+        dataType: "json",
+        url: "/api/ApiBContent",
+        data: { Bid: bid },
+        success: function (res) {
+
+            if (res != "NO") {
+                var UserID = res.UserID;
+                var Bid = res.BlogID;
+                $.ajax({
+                    type: "Get",
+                    data: { uid: UserID },
+                    dataType: "json",
+                    url: "/api/ApiGetName",
+                    success: function (help, ID) {
+                        ZName = help;
+                        Bid = ID;
+                    }
+                })
+                var UserImg;
+                $.ajax({
+                    type: "Get",
+                    data: { uid: UserID },
+                    dataType: "json",
+                    url: "/api/ApiGetBUser",
+                    success: function (help) {
+                        UserImg = help.UserAvatarUrl;
+                    }
+                })
+
+                $html = '<div class="article-header-box"><div class="article-header" ><div class="article-title-box"><h1 class="c">' + res.BlogTitle + '</h1></div><div class="article-info-box"><div class="article-info-top"><img class="article-type-img" src="../img/original.png" alt=""><div class="article-type-zz"><a>' + ZName + '</a></div></div><div class="blog-tags-box"><span>文章标签：' + res.LabelID + '</span></div></div></div ><div class="article-img-box"><img style="width:20%;height:20%;" src="/Upload/BlogImage/' + res.BlogImageUrl + '" /></div><div class="article-banner-box">' + res.BlogContent + '</div></div ><div class="article-bottom-box" ><div class="bottom-box-left"><div class="box-left-img"><img style="width:100%;height:100%;border-radius:50%;" src="/Upload/UserImage/' + UserImg + '" /></div><div class="box-left-zz"><a href="../Home/Personal_zhuye?uid=' + res.UserID +'">' + ZName + '</a></div><div></div></div><div class="bottom-box-right"><div><svg t="1685634129122" id="svg-dz" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2430" width="20" height="20"><path d="M857.28 344.992h-264.832c12.576-44.256 18.944-83.584 18.944-118.208 0-78.56-71.808-153.792-140.544-143.808-60.608 8.8-89.536 59.904-89.536 125.536v59.296c0 76.064-58.208 140.928-132.224 148.064l-117.728-0.192A67.36 67.36 0 0 0 64 483.04V872c0 37.216 30.144 67.36 67.36 67.36h652.192a102.72 102.72 0 0 0 100.928-83.584l73.728-388.96a102.72 102.72 0 0 0-100.928-121.824zM128 872V483.04c0-1.856 1.504-3.36 3.36-3.36H208v395.68H131.36A3.36 3.36 0 0 1 128 872z m767.328-417.088l-73.728 388.96a38.72 38.72 0 0 1-38.048 31.488H272V476.864a213.312 213.312 0 0 0 173.312-209.088V208.512c0-37.568 12.064-58.912 34.72-62.176 27.04-3.936 67.36 38.336 67.36 80.48 0 37.312-9.504 84-28.864 139.712a32 32 0 0 0 30.24 42.496h308.512a38.72 38.72 0 0 1 38.048 45.888z" p-id="2431"></path></svg><a class="dzs" href="#">' + res.BlogLike + '</a></div><div  id="sccolor"><svg t="1685634564549" id="svg-sc" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2373" width="20" height="20"><path d="M335.008 916.629333c-35.914667 22.314667-82.88 10.773333-104.693333-25.557333a77.333333 77.333333 0 0 1-8.96-57.429333l46.485333-198.24a13.141333 13.141333 0 0 0-4.021333-12.864l-152.16-132.586667c-31.605333-27.52-35.253333-75.648-8.234667-107.733333a75.68 75.68 0 0 1 51.733333-26.752L354.848 339.2c4.352-0.362667 8.245333-3.232 10.026667-7.594667l76.938666-188.170666c16.032-39.2 60.618667-57.92 99.52-41.461334a76.309333 76.309333 0 0 1 40.832 41.461334l76.938667 188.16c1.781333 4.373333 5.674667 7.253333 10.026667 7.605333l199.712 16.277333c41.877333 3.413333 72.885333 40.458667 69.568 82.517334a76.938667 76.938667 0 0 1-26.08 51.978666l-152.16 132.586667c-3.541333 3.082667-5.141333 8.074667-4.021334 12.853333l46.485334 198.24c9.621333 41.013333-15.36 82.336-56.138667 92.224a75.285333 75.285333 0 0 1-57.525333-9.237333l-170.976-106.24a11.296 11.296 0 0 0-12.010667 0l-170.986667 106.24zM551.786667 756.032l170.976 106.24c2.624 1.621333 5.717333 2.122667 8.650666 1.408 6.410667-1.557333 10.56-8.426667 8.928-15.424l-46.485333-198.24a77.141333 77.141333 0 0 1 24.277333-75.733333L870.293333 441.706667c2.485333-2.165333 4.053333-5.312 4.330667-8.746667 0.565333-7.136-4.490667-13.173333-10.976-13.696l-199.712-16.288a75.989333 75.989333 0 0 1-64.064-47.168l-76.938667-188.16a12.309333 12.309333 0 0 0-6.538666-6.741333c-5.898667-2.496-12.725333 0.373333-15.328 6.741333l-76.949334 188.16a75.989333 75.989333 0 0 1-64.064 47.168l-199.701333 16.288a11.68 11.68 0 0 0-7.978667 4.181333 13.226667 13.226667 0 0 0 1.333334 18.261334l152.16 132.586666a77.141333 77.141333 0 0 1 24.277333 75.733334l-46.485333 198.229333a13.333333 13.333333 0 0 0 1.514666 9.877333c3.488 5.792 10.581333 7.530667 16.064 4.128l170.986667-106.229333a75.296 75.296 0 0 1 79.562667 0z" fill="#000000" p-id="2374"></path></svg></div><div><svg t="1685634483713" class="icon" id="svg-pl" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4621" width="20" height="20"><path d="M157.568 751.296c-11.008-18.688-18.218667-31.221333-21.802667-37.909333A424.885333 424.885333 0 0 1 85.333333 512C85.333333 276.362667 276.362667 85.333333 512 85.333333s426.666667 191.029333 426.666667 426.666667-191.029333 426.666667-426.666667 426.666667a424.778667 424.778667 0 0 1-219.125333-60.501334 2786.56 2786.56 0 0 0-20.053334-11.765333l-104.405333 28.48c-23.893333 6.506667-45.802667-15.413333-39.285333-39.296l28.437333-104.288z m65.301333 3.786667l-17.258666 63.306666 63.306666-17.258666a32 32 0 0 1 24.522667 3.210666 4515.84 4515.84 0 0 1 32.352 18.944A360.789333 360.789333 0 0 0 512 874.666667c200.298667 0 362.666667-162.368 362.666667-362.666667S712.298667 149.333333 512 149.333333 149.333333 311.701333 149.333333 512c0 60.586667 14.848 118.954667 42.826667 171.136 3.712 6.912 12.928 22.826667 27.370667 47.232a32 32 0 0 1 3.338666 24.714667z m145.994667-70.773334a32 32 0 1 1 40.917333-49.205333A159.189333 159.189333 0 0 0 512 672c37.888 0 73.674667-13.173333 102.186667-36.885333a32 32 0 0 1 40.917333 49.216A223.178667 223.178667 0 0 1 512 736a223.178667 223.178667 0 0 1-143.136-51.690667z" fill="#000000" p-id="4622"></path></svg></div></div></div >'
+
+
+                $("#detail-app").append($html);
+                var tfdz = 0;
+                $("#svg-dz").click(function () {
+
+                    if (tfdz == 0) {
+                        $.ajax({
+                            type: "Get",
+                            data: { Bid: bid },
+                            dataType: "json",
+                            url: "/api/ApiBlogdz",
+                            success: function (res) {
+                                $(".dzs").html(res);
+                                tfdz++;
+                                layer.msg("点赞成功！");
+                            }
+                        })
+                    } else {
+                        $.ajax({
+                            type: "Get",
+                            data: { Bid: bid },
+                            dataType: "json",
+                            url: "/api/ApiBlogxdz",
+                            success: function (res) {
+                                $(".dzs").html(res);
+                                tfdz--;
+                                layer.msg("取消点赞！");
+                            }
+                        })
+                    }
+                })
+
+                $("#svg-sc").click(function () {
+
+                    $.ajax({
+                        type: "Get",
+                        data: { Bid: bid },
+                        dataType: "json",
+                        url: "/api/ApiBlogsc",
+                        success: function (res) {
+                            if (res == "sc") {
+                                var head = document.getElementById("sccolor");
+                                head.style.color = "red";
+                                layer.msg("收藏成功！");
+                            } else if (res == "xsc") {
+                                layer.msg("取消收藏成功！");
+                            }
+                        }
+                    })
+                })
+            } else {
+                $h1 = "<h1>暂时没有更多数据</h1>"
+                $("#datail-app").append($h1);
+            }
+        }
+    })
+    //$.ajax({
+
+    //    success: function (res) {
+        
+    //    }
+    //})
+    $("#svg-pl").click(function () {
+        $html = '<div style="padding: 16px;border-bottom:1px solid #dcdcdc"><textarea id="PLtext" name="" placeholder="欢迎高质量的评论" class="layui-textarea"></textarea><button id="open-pl" class="layui-btn layui-btn-primary">评论</button></div><div id="Blog_pl">';
+        $.ajax({
+            type: "Get",
+            data: { Bid: bid },
+            url: "/api/ApiPLtext",
+            
+            success: function (res) {
+                if (res.length>0) {
+
+                    for (var i = 0; i < res.length; i++) {
+
+                        $html += '<div style="border-bottom:1px solid #dcdcdc"><div style = "display:flex;flex-flow:row;" ><img style="width:50px;border-radius:50%;" src="../Upload/UserImage/' + res[i].uimg + '" /><div><div style="font-size:18px;">' + res[i].uname + '</div><div>:' + res[i].ctext + '</div></div></div ></div > '
+                    }
+                }
+            }
+        })
+        
+
+        $html += '</div>';
+        layer.open({
+            type: 1,
+            offset: 'r',
+            anim: 'slideLeft', // 从右往左
+            area: ['320px', '100%'],
+            shade: 0.1,
+            shadeClose: true,
+            id: 'ID-demo-layer-direction-r',
+            content: $html,
+        });
+
+        $("#open-pl").click(function () {
+            console.log($("#PLtext").val());
+            if ($("#PLtext").val() != "") {
+                var text = $("#PLtext").val();
+                $.ajax({
+                    type: "Get",
+                    data: { Bid: bid, text: text },
+                    url: "/api/ApiBlogPL",
+
+                    success: function (res) {
+                        if (res) {
+                            layer.open({
+                                type: 1,
+                                offset: 'r',
+                                anim: 'slideLeft', // 从右往左
+                                area: ['320px', '100%'],
+                                shade: 0.1,
+                                shadeClose: true,
+                                id: 'ID-demo-layer-direction-r',
+                                content: $html,
+                            });
+                        }
+                    }
+                })
+            }
+        })
+    })
+ 
+
+    
+
+
+})

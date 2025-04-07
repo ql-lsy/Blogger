@@ -1,0 +1,17 @@
+﻿.Creation_menu {
+    position: fixed;
+    left: 0;
+    top: 60px;
+    width: 17%;
+    text-align: left;
+    padding: 40px 0px;
+    height: 200%;
+}
+
+    .Creation_menu #Creation_publish {
+        background-color: #FC5531;
+        padding: 0px 20%;
+        height: 50px;
+        margin: 0px 18%;
+        text-align: center;
+    }

@@ -1,0 +1,258 @@
+﻿$(function () {
+
+    //1定义延时器的ID
+    var timer = null;
+
+    //2定义防抖函数
+    function debounceSearch(kw) {
+        timer = setTimeout(function () {
+            getSuggestList(kw);
+        }, 500)
+    }
+    function getSuggestList(kw) {
+
+        $.ajax({
+            url: "/api/ApiGetSearch",
+            type: "Get",
+            data: { Name: kw },
+            success: function (res) {
+                if (res.length > 0) {
+                    $("#Search2_Box").empty();
+                    for (var i = 0; i < res.length; i++) {
+                        $li = "<li class='Search2_item'>" + res[i].SearchName + "</li>"
+                        $("#Searc2_Box").append($li);
+                    }
+                } else {
+                    $("#Search2_Box").empty();
+                    $("#Search2_Box").hide();
+                }
+            }
+        })
+
+    }
+    $(document).on("click", ".Search2_item", function () {
+        var text = $(this).html();
+        $("#Home-input-Search").val(text);
+    });
+    $("#Home-input-Search").on("keyup", function () {
+        //3清空timer
+        clearTimeout(timer);
+        var keywords = $(this).val().trim();
+        if (keywords.length <= 0) {
+            $("#Search2_Box").hide();
+            $("#Search2_Box").empty();
+        } else {
+            $("#Search2_Box").show();
+            debounceSearch(keywords);
+        }
+    })
+
+
+
+    $("#Home-input-Btn").click(function () {
+        var s = $("#Home-input-Search").val();
+        $.ajax({
+            type: "Get",
+            data: { search: s, n: 1 },
+            dataType: "html",
+            url: "/api/ApiSearch",
+            success: function (res) {
+                $h1 = "<h1>" + res + "</h1>";
+                $("#Search_app").empty().append($h1);
+            }
+        })
+        
+    })
+    function cx(s) {
+        $.ajaxSettings.async = false
+        $.ajax({
+            type: "Get",
+            data: { search: s, n: 1 },
+            dataType: "json",
+            url: "/api/ApiSearch",
+
+            success: function (res) {
+
+                if (res != "NO" && res != "[]") {
+                    for (var i = 0; i < res.length; i++) {
+                        var UserID = res[i].UserID;
+
+                        $.ajax({
+                            type: "Get",
+                            data: { uid: UserID },
+                            dataType: "json",
+                            url: "/api/ApiGetName",
+                            success: function (help) {
+                                ZName = help;
+
+                            }
+                        })
+
+                        //#region
+                        $html = '<div id="Search-banner-item" > <div class="Search-banner-item-hd"><a href="../Blog/detail?Bid=' + res[i].BlogID + '"><h3>' + res[i].BlogTitle + '</h3></a></div> <div class="Search-banner-item-bd"> <div class="bdc-lt" ><div class="bdc-ft"><div style="height:60px;padding:0px 30px 0px 0px;"><p>' + res[i].BlogDec + '</p></div><div class="ft-bottom"><div class="btm-lt"><div class="btm-lt-ck"><svg t="1684913982618" class="icon1" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="2380" width="25" height="25"><path d="M977.454545 551.563636c-6.981818 0-16.290909-4.654545-20.945454-11.636363C837.818182 349.090909 679.563636 244.363636 512 244.363636c-167.563636 0-325.818182 104.727273-444.509091 297.890909-6.981818 11.636364-20.945455 13.963636-32.581818 6.981819-11.636364-6.981818-13.963636-20.945455-6.981818-32.581819C155.927273 309.527273 328.145455 197.818182 512 197.818182s356.072727 114.036364 484.072727 318.836363c6.981818 11.636364 2.327273 25.6-6.981818 32.581819-4.654545 2.327273-9.309091 2.327273-11.636364 2.327272z" fill="#ABABAB" p-id="2381"></path><path d="M512 861.090909c-183.854545 0-356.072727-114.036364-484.072727-318.836364-6.981818-11.636364-2.327273-25.6 6.981818-32.581818 11.636364-6.981818 25.6-2.327273 32.581818 6.981818C186.181818 707.490909 344.436364 814.545455 512 814.545455c167.563636 0 325.818182-104.727273 444.509091-297.89091 6.981818-11.636364 20.945455-13.963636 32.581818-6.981818 11.636364 6.981818 13.963636 20.945455 6.981818 32.581818C868.072727 747.054545 695.854545 861.090909 512 861.090909z" fill="#ABABAB" p-id="2382"></path><path d="M512 719.127273c-111.709091 0-202.472727-90.763636-202.472727-202.472728s90.763636-202.472727 202.472727-202.472727c111.709091 0 202.472727 90.763636 202.472727 202.472727s-90.763636 202.472727-202.472727 202.472728z m0-356.072728A155.927273 155.927273 0 1 0 512 674.909091a155.927273 155.927273 0 0 0 0-311.854546z" fill="#ABABAB" p-id="2383"></path></svg>' + res[i].BlogClicks + '</div><div class="btm-lt-dz"><svg t="1684914058612" class="icon2" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="3395" width="25" height="25"><path d="M939.358251 423.424662c-23.01825-37.252439-62.924121-60.779272-107.019409-63.209624-2.755764-0.38681-5.510504-0.579191-8.347109-0.579191l-152.202471-0.121773c6.649444-28.975938 10.015098-58.653865 10.015098-88.657202 0-28.223808-3.213181-57.139372-9.556657-85.952604-0.447185-2.043542-1.098008-4.006244-1.932002-5.866614-15.820314-57.302077-67.37755-96.841605-127.282918-96.841605-72.827679 0-132.081201 59.254545-132.081201 132.081201 0 3.334955 0.132006 6.66991 0.406253 10.015098-2.196015 57.211003-32.108279 109.947088-80.269162 141.363611-14.447037 9.42465-18.524912 28.773324-9.099239 43.220361 9.414417 14.437827 28.752858 18.535145 43.220361 9.099239 65.811892-42.925648 106.429984-115.325585 108.656699-193.684234 0.030699-1.332345-0.010233-2.663666-0.14224-3.996011-0.203638-2.012843-0.304945-4.016477-0.304945-6.019087 0-38.381146 31.233352-69.614497 69.614497-69.614497 32.57593 0 60.474326 22.204721 67.824735 53.997821 0.356111 1.534959 0.823761 3.019777 1.402953 4.453429 4.696975 22.814612 7.076162 45.579081 7.076162 67.743894 0 37.485753-6.222725 74.352405-18.494213 109.592001-3.324722 9.546424-1.819438 20.111037 4.02671 28.345582 5.856381 8.245801 15.332197 13.146415 25.448602 13.156648l193.226816 0.101307c1.423419 0.264013 2.857071 0.426719 4.300956 0.477884 24.116257 0.9967 45.935192 13.614066 58.603723 34.090423 7.838525 12.31242 11.438517 26.800389 10.431583 41.939181-0.080841 0.945535-0.121773 1.911536-0.11154 2.877537 0 0.854461 0.040932 1.697665 0.11154 2.53166 0.010233 0.335644-0.030699 0.661056-0.11154 0.976234-0.101307 0.376577-0.193405 0.772596-0.284479 1.159406l-74.972529 330.391802c-0.914836 1.281179-1.738597 2.6432-2.449795 4.046153-5.937223 11.762905-14.660908 21.48329-25.346271 28.172643-10.746762 6.812149-23.059182 10.614755-35.757388 11.06194-0.854461-0.061398-513.766226-0.224104-513.766226-0.224104-0.467651-0.020466-0.935302-0.030699-1.402953-0.030699 0 0-111.01542 0.172939-112.718201 0.457418-1.932002 0-3.446495-1.50426-3.446495-3.415796l0.299829-416.334173c0-1.901303 1.545192-3.446495 3.01466-3.456728l1.245364 0.121773c1.174756 0.132006 2.653433 0.284479 3.52836 0.193405l83.82822-0.222057 0 339.367221c0 17.253966 13.979386 31.233352 31.233352 31.233352s31.233352-13.979386 31.233352-31.233352L281.009092 435.350273c0-1.778506 0-8.631588 0-10.411117 0-17.253966-13.979386-30.928407-31.233352-30.928407-1.50426 0-117.547183 0.304945-119.402437 0.304945-36.34272 0-65.913199 29.566386-65.913199 65.893756l-0.299829 416.334173c0 36.337603 29.571503 65.902966 65.913199 65.902966 2.541893 0 111.406323-0.457418 111.406323-0.457418 0.457418 0.020466 0.925069 0.030699 1.382487 0.030699 0 0 511.458671 0.274246 512.505513 0.274246 25.469068 0 50.296523-7.197936 71.647807-20.73116 19.612687-12.281721 35.777855-29.881564 46.839795-50.967812 3.660366-5.622044 6.435573-11.875468 8.256034-18.615986 0.11154-0.416486 0.213871-0.823761 0.304945-1.240247l74.881454-330.340637c1.596358-6.212492 2.257413-12.586666 2.00261-18.992563C960.892707 473.366098 953.948551 446.331371 939.358251 423.424662z" fill="#999999" p-id="3396"></path><path d="M450.027553 518.650467c-17.253966 0-31.233352 13.979386-31.233352 31.233352l0 30.470989c0 17.253966 13.979386 31.233352 31.233352 31.233352 17.253966 0 31.233352-13.979386 31.233352-31.233352l0-30.470989C481.260905 532.629853 467.281519 518.650467 450.027553 518.650467z" fill="#999999" p-id="3397"></path><path d="M693.805696 518.650467c-17.253966 0-31.233352 13.979386-31.233352 31.233352l0 30.470989c0 17.253966 13.979386 31.233352 31.233352 31.233352 17.253966 0 31.233352-13.979386 31.233352-31.233352l0-30.470989C725.039048 532.629853 711.058638 518.650467 693.805696 518.650467z" fill="#999999" p-id="3398"></path><path d="M648.940882 660.09492c-14.304797-9.393951-33.592073-5.398964-43.159986 8.763594-0.132006 0.193405-13.614066 19.754926-34.171264 19.754926-19.98824 0-32.423457-18.09717-33.266661-19.368116-9.17087-14.427594-28.254507-18.809391-42.834574-9.770528-14.650675 9.109472-19.155269 28.366048-10.055007 43.016723 11.214413 18.047028 41.96988 48.588625 86.156242 48.588625 43.962258 0 75.104535-30.318516 86.572728-48.222281C667.404396 688.461991 663.216004 669.500127 648.940882 660.09492z" fill="#999999" p-id="3399"></path></svg>' + res[i].BlogLike + '</div></div><div class="btm-rt"><div class="btm-rt-zz">作者:' + ZName + ' </div><div class="btm-rt-sj">发布时间:' + res[i].BlogTime + '</div></div></div></div><div class="bdc-it"><img class="bdc-img" src="/Upload/BlogImage/' + res[i].BlogImageUrl + '" /></div></div></div></div> ';
+                        //#endregion
+
+                        $("#Search-app").append($html);
+
+
+                    }
+                } else {
+                    $h1 = "<h1>暂时没有更多数据</h1>"
+                    $("#Search-app").append($h1);
+                }
+
+            }
+        })
+    }
+
+    var loc = location.href;
+    var n1 = loc.length;
+    var n2 = loc.indexOf('=');
+    var str = loc.slice(n2 + 1, n1);
+    let decoded = decodeURIComponent(str);
+/*    alert(decoded);*/
+    $("#Search-input-Search_ALL").val(decoded);
+    cx(decoded);
+    $("#Search-boke").click(function () {
+        $("#Search-app").empty();
+        var s = $("#Search-input-Search_ALL").val();
+        var ZName;
+        
+        cx(s);
+
+    })
+
+    $("#Search-load").click(function () {
+        $("#Search-app").empty();
+        var s = $("#Search-input-Search_ALL").val();
+
+        $(function () {
+
+            function downloadFile(url) {
+                var a = document.createElement('a');
+                a.href = url;
+                a.target = '_blank';
+                document.body.appendChild(a);
+                a.click();
+            }
+
+            var divID = document.getElementById("Search-app");
+            $.ajax({
+                type: "Get",
+                data: { search: s },
+                url: "/Api/ApiSearchLoad",
+                success: function (res) {
+                    if (res != "NO" && res != "[]") {
+                        for (var j = 0; j < res.length; j++) {
+                            var newDiv = document.createElement("div");
+                            newDiv.className = "xiazai";
+                            newDiv.style.marginLeft = "20px";
+                            newDiv.style.lineHeight = "40px";
+                            newDiv.innerHTML = '<hr />' + '<h3>' + res[j].name + '</h3>' +
+                                '<button type="button" class="layui-btn layui-btn-primary layui-btn-xs">' + res[j].Label + '</button>'
+                                + '<p>' + "需积分:" + '<label>' + res[j].KunCoin + '</label>' + '<label style="margin-left:10px;">' + res[j].Time + '</label>' + "上传"
+                                + '<label style="margin-left:10px; margin-right:20px;">' + res[j].Url + '</label>' + '<button type="button" class="layui-btn layui-btn-normal layui-btn-radius bouuton" data-kuncoin="' + res[j].KunCoin + '" data-uploaderid="' + res[j].uid + '" id="xz">' + "立即下载" + '</button>'
+                                + '</p>'
+                                + '<p class="news_info" title="' + res[j].Des + '">'
+                                + res[j].Des
+                                + '</p>';
+                            divID.appendChild(newDiv);
+
+/*                            $("#Search-app").append($html);*/
+                            // 添加下载按钮的点击事件data-kuncoin="' + res[j].KunCoin + '"
+                            var button = newDiv.querySelector('#xz');
+                            button.addEventListener('click', function () {
+                                var index = this.getAttribute('data-index');
+                                var url = '../Upload/Update/' + res[index].Url + res[index].suffix1;
+                                var kuncoin = this.getAttribute('data-kuncoin');
+                                var uploaderid = this.getAttribute('data-uploaderid'); // 获取上传文件的用户 ID
+                                $.ajax({
+                                    type: "GET",
+                                    url: "/Api/ApiUpdate/KuncoinGet",
+                                    data: {
+                                        UserKunCoin: kuncoin
+                                    },
+                                    success: function (res) {
+                                        if (res) {
+                                            downloadFile(url);
+                                            addKuncoin(uploaderid, kuncoin);
+                                        } else {
+                                            alert("币不足无法下载");
+                                        }
+
+                                    }, error: function (xhr, status, error) {
+                                        console.error(xhr.responseText); // 打印错误信息
+                                    }
+                                });
+
+
+                                // 在这里处理积分的逻辑
+                            });
+                            // 保存 j 的值到 index 变量中
+                            button.setAttribute('data-index', j);
+                            function addKuncoin(uploaderid, kuncoin) {
+                                $.ajax({
+                                    type: "GET",
+                                    url: "/Api/ApiUpdate/AddKuncoinGet",
+                                    data: {
+                                        uploaderid: uploaderid,
+                                        kuncoin: kuncoin
+                                    },
+                                    success: function (res) {
+                                        if (res) {
+                                            console.log('增加币成功');
+                                        } else {
+                                            console.log('增加币失败');
+                                        }
+                                    }, error: function (xhr, status, error) {
+                                        console.error(xhr.responseText); // 打印错误信息
+                                    }
+
+                                });
+                            }
+                        }
+                    }
+                }
+            });
+        });
+
+
+
+                
+                    
+
+                        
+                         
+                // else {
+                //    $h1 = "<h1>暂时没有更多数据</h1>"
+                //    $("#Search-app").append($h1);
+                //}
+
+
+
+    })
+
+
+
+    $("#Search-user").click(function () {
+        $("#Search-app").empty();
+        var s = $("#Search-input-Search_ALL").val();
+        $.ajax({
+            type: "Get",
+            data: { search:s },
+            dataType: "json",
+            url: "/api/ApiSearchUser",
+            success: function (res) {
+                for (var i = 0; i < res.length; i++) {
+                    $html = '<div style="display:flex;flex-flow:row;border-bottom:1px solid #e5e5e5"><img style="width:5%;border-radius:50%;" src="../Upload/UserImage/' + res[i].UserAvatarUrl + '" /><div style="display:flex;flex-flow:column;"><a style="font-size:18px;" href="../Home/Personal_zhuye?uid=' + res[i].UserID + '">' + res[i].UserName + '</a><a href="#">' + res[i].UserLabel + '</a></div></div>';
+                    $("#Search-app").append($html);
+                }
+            }
+        })
+
+    })
+
+
+
+
+})

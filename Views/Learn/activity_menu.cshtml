@@ -1,0 +1,53 @@
+﻿<div class="layui-panel Creation_menu">
+    <ul class="layui-menu" id="docDemoMenu1">
+        <li class="layui-menu-item-checked" lay-options="{id: 100}">
+            <div id="Activity_Home" class="layui-menu-body-title">活动中心</div>
+        </li>
+        <li class="layui-menu-item-group layui-menu-item-down" lay-options="{type: 'group'}">
+            <div id="bodytitle1" class="layui-menu-body-title">
+                活动类别<i class="layui-icon layui-icon-up"></i>
+            </div>
+            <ul>
+                <li id="Creation_Opus" lay-options="{id: 1003}">志愿活动</li>
+                <li id="Creation_Earnings" lay-options="{id: 1004}">
+                    <div class="layui-menu-body-title">学术活动</div>
+                </li>
+                <li id="Creation_Other" lay-options="{id: 1004}">
+                    <div class="layui-menu-body-title">文艺活动</div>
+                </li>
+                <li id="Creation_Followers" lay-options="{id: 1005}">创新创业活动</li>
+            </ul>
+        </li>
+        <li class="layui-menu-item-group layui-menu-item-down" lay-options="{type: 'group'}">
+            <div id="bodytitle2" class="layui-menu-body-title">
+                管理<i class="layui-icon layui-icon-up"></i>
+            </div>
+            <ul>
+                <li id="Creation_Management" lay-options="{id: 1001}">内容管理</li>
+                <li id="Creation_number" lay-options="{id: 1002}">报名人员</li>
+            </ul>
+        </li>
+    </ul>
+</div>
+
+<link href="~/Content/css/Creation_menu_css1.css" rel="stylesheet" />
+<script src="~/Scripts/JS/Activity_menu_pulish.js"></script>
+<script src="~/Scripts/JS/Activity_Menu_Hand.js"></script>
+
+<script>
+   
+</script>
+
+<style>
+    .layui-menu-item-down > ul {
+        display: none; /* 默认隐藏下拉菜单 */
+    }
+
+    .layui-menu-item-down.layui-menu-item-show > ul {
+        display: block; /* 展开时显示下拉菜单 */
+    }
+
+    .content-section {
+        display: none; /* 所有内容区域默认隐藏 */
+    }
+</style>

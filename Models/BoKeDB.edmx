@@ -1,0 +1,759 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BoKeDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Blog">
+          <Key>
+            <PropertyRef Name="BlogID" />
+          </Key>
+          <Property Name="BlogID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BlogDec" Type="nvarchar" MaxLength="100" />
+          <Property Name="BlogContent" Type="nvarchar" MaxLength="4000" />
+          <Property Name="BlogTitle" Type="nvarchar" MaxLength="20" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="BlogClicks" Type="int" />
+          <Property Name="BlogTime" Type="datetime" />
+          <Property Name="BlogImageUrl" Type="nvarchar" MaxLength="100" />
+          <Property Name="BlogLike" Type="int" />
+          <Property Name="BlogForword" Type="int" />
+          <Property Name="LabelID" Type="int" />
+          <Property Name="LastTime" Type="date" />
+          <Property Name="LastClicks" Type="int" />
+        </EntityType>
+        <EntityType Name="BlogLike">
+          <Key>
+            <PropertyRef Name="BlogLikeID" />
+          </Key>
+          <Property Name="BlogLikeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BolgID" Type="int" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="CommentsB">
+          <Key>
+            <PropertyRef Name="CommentsBID" />
+          </Key>
+          <Property Name="CommentsBID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CommentsBContent" Type="nvarchar" MaxLength="500" />
+          <Property Name="CommentsBLike" Type="int" />
+          <Property Name="BolgID" Type="int" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="CommentsD">
+          <Key>
+            <PropertyRef Name="CommentsDID" />
+          </Key>
+          <Property Name="CommentsDID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CommentsDContent" Type="nvarchar" MaxLength="500" />
+          <Property Name="CommentsDLike" Type="int" />
+          <Property Name="BolgID" Type="int" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="Community">
+          <Key>
+            <PropertyRef Name="CommunityID" />
+          </Key>
+          <Property Name="CommunityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CommunityName" Type="nvarchar" MaxLength="200" />
+          <Property Name="CommunityDec" Type="text" />
+        </EntityType>
+        <EntityType Name="Communitymember">
+          <Key>
+            <PropertyRef Name="CommunitymemberID" />
+          </Key>
+          <Property Name="CommunitymemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="CommunityID" Type="int" />
+        </EntityType>
+        <EntityType Name="Concern">
+          <Key>
+            <PropertyRef Name="ConcernID" />
+          </Key>
+          <Property Name="ConcernID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConcernUserID" Type="int" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="course">
+          <Key>
+            <PropertyRef Name="courseId" />
+          </Key>
+          <Property Name="courseId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="courseName" Type="nvarchar" MaxLength="100" />
+          <Property Name="coursePicUrl" Type="nvarchar" MaxLength="100" />
+          <Property Name="originalPrice" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="courseHit" Type="int" />
+          <Property Name="courseDec" Type="text" />
+        </EntityType>
+        <EntityType Name="courseel">
+          <Key>
+            <PropertyRef Name="courseelId" />
+          </Key>
+          <Property Name="courseelId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="courseelpf" Type="int" />
+          <Property Name="courseelcontent" Type="text" />
+          <Property Name="courseId" Type="int" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="Download">
+          <Key>
+            <PropertyRef Name="DownloadID" />
+          </Key>
+          <Property Name="DownloadID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="frequency" Type="int" />
+          <Property Name="DownloadPath" Type="nvarchar" MaxLength="100" />
+          <Property Name="DownloadName" Type="nvarchar" MaxLength="100" />
+          <Property Name="DownloadDec" Type="nvarchar" MaxLength="100" />
+          <Property Name="DownloadKunCoin" Type="int" />
+          <Property Name="DownloadKunCoinObtain" Type="int" />
+          <Property Name="LabelID" Type="int" />
+          <Property Name="DownloadTime" Type="nvarchar" MaxLength="50" />
+          <Property Name="suffix" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Favorite">
+          <Key>
+            <PropertyRef Name="FavoriteID" />
+          </Key>
+          <Property Name="FavoriteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="BlogID" Type="int" />
+        </EntityType>
+        <EntityType Name="Followers">
+          <Key>
+            <PropertyRef Name="FollowersID" />
+          </Key>
+          <Property Name="FollowersID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="FollowersUserID" Type="int" />
+          <Property Name="UserID" Type="int" />
+        </EntityType>
+        <EntityType Name="History">
+          <Key>
+            <PropertyRef Name="HistoryID" />
+          </Key>
+          <Property Name="HistoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BlogID" Type="int" />
+          <Property Name="HistoryTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Information">
+          <Key>
+            <PropertyRef Name="InformationID" />
+          </Key>
+          <Property Name="InformationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="IfQuantity" Type="int" />
+          <Property Name="IfWhether" Type="int" />
+        </EntityType>
+        <EntityType Name="Issue">
+          <Key>
+            <PropertyRef Name="IssueID" />
+          </Key>
+          <Property Name="IssueID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="IssueContent" Type="text" />
+          <Property Name="Issuedetails" Type="text" />
+          <Property Name="IssueDateTime" Type="datetime" />
+          <Property Name="IssueQuantity" Type="int" />
+        </EntityType>
+        <EntityType Name="Label">
+          <Key>
+            <PropertyRef Name="LabelID" />
+          </Key>
+          <Property Name="LabelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="LabelText" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="MessagesID" />
+          </Key>
+          <Property Name="MessagesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="MessagesText" Type="text" />
+          <Property Name="FromUserID" Type="int" />
+          <Property Name="ToUserID" Type="int" />
+          <Property Name="MessagesTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Notice">
+          <Key>
+            <PropertyRef Name="NoticeID" />
+          </Key>
+          <Property Name="NoticeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NoticeText" Type="text" />
+          <Property Name="NoticeImage" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Reply">
+          <Key>
+            <PropertyRef Name="ReplyID" />
+          </Key>
+          <Property Name="ReplyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IssueID" Type="int" />
+          <Property Name="ReplyContent" Type="text" />
+          <Property Name="ReplyTime" Type="datetime" />
+          <Property Name="UserID" Type="int" />
+          <Property Name="ReplyLike" Type="int" />
+        </EntityType>
+        <EntityType Name="Search">
+          <Key>
+            <PropertyRef Name="SearchID" />
+          </Key>
+          <Property Name="SearchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SearchName" Type="nvarchar" MaxLength="100" />
+          <Property Name="SearchCount" Type="int" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserAccount" Type="nvarchar" MaxLength="20" />
+          <Property Name="UserPassword" Type="nvarchar" MaxLength="20" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="20" />
+          <Property Name="UserBirthday" Type="datetime" />
+          <Property Name="UserPhone" Type="nvarchar" MaxLength="11" />
+          <Property Name="UserAddress" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserProfile" Type="text" />
+          <Property Name="UserLabel" Type="nvarchar" MaxLength="20" />
+          <Property Name="UserAvatarUrl" Type="nvarchar" MaxLength="100" />
+          <Property Name="UserVIP" Type="int" />
+          <Property Name="UserKunCoin" Type="int" />
+          <Property Name="UserExperience" Type="int" />
+          <Property Name="UserlastLoginTime" Type="date" />
+          <Property Name="FollowersCount" Type="int" />
+          <Property Name="FavoriteCount" Type="int" />
+          <Property Name="DownloadKunCoinObtainCount" Type="int" />
+        </EntityType>
+        <EntityContainer Name="BoKeDBModelStoreContainer">
+          <EntitySet Name="Blog" EntityType="Self.Blog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BlogLike" EntityType="Self.BlogLike" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommentsB" EntityType="Self.CommentsB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CommentsD" EntityType="Self.CommentsD" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Community" EntityType="Self.Community" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Communitymember" EntityType="Self.Communitymember" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Concern" EntityType="Self.Concern" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="course" EntityType="Self.course" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="courseel" EntityType="Self.courseel" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Download" EntityType="Self.Download" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Favorite" EntityType="Self.Favorite" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Followers" EntityType="Self.Followers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="History" EntityType="Self.History" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Information" EntityType="Self.Information" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Issue" EntityType="Self.Issue" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Label" EntityType="Self.Label" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Messages" EntityType="Self.Messages" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Notice" EntityType="Self.Notice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reply" EntityType="Self.Reply" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Search" EntityType="Self.Search" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BoKeDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Blog">
+          <Key>
+            <PropertyRef Name="BlogID" />
+          </Key>
+          <Property Name="BlogID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BlogDec" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BlogContent" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="BlogTitle" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="BlogClicks" Type="Int32" />
+          <Property Name="BlogTime" Type="DateTime" Precision="3" />
+          <Property Name="BlogImageUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="BlogLike" Type="Int32" />
+          <Property Name="BlogForword" Type="Int32" />
+          <Property Name="LabelID" Type="Int32" />
+          <Property Name="LastTime" Type="DateTime" Precision="0" />
+          <Property Name="LastClicks" Type="Int32" />
+        </EntityType>
+        <EntityType Name="CommentsB">
+          <Key>
+            <PropertyRef Name="CommentsBID" />
+          </Key>
+          <Property Name="CommentsBID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CommentsBContent" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CommentsBLike" Type="Int32" />
+          <Property Name="BolgID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="CommentsD">
+          <Key>
+            <PropertyRef Name="CommentsDID" />
+          </Key>
+          <Property Name="CommentsDID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CommentsDContent" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+          <Property Name="CommentsDLike" Type="Int32" />
+          <Property Name="BolgID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Community">
+          <Key>
+            <PropertyRef Name="CommunityID" />
+          </Key>
+          <Property Name="CommunityID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CommunityName" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CommunityDec" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Concern">
+          <Key>
+            <PropertyRef Name="ConcernID" />
+          </Key>
+          <Property Name="ConcernID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConcernUserID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="courseel">
+          <Key>
+            <PropertyRef Name="courseelId" />
+          </Key>
+          <Property Name="courseelId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="courseelpf" Type="Int32" />
+          <Property Name="courseelcontent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="courseId" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Download">
+          <Key>
+            <PropertyRef Name="DownloadID" />
+          </Key>
+          <Property Name="DownloadID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="frequency" Type="Int32" />
+          <Property Name="DownloadPath" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DownloadName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DownloadDec" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="DownloadKunCoin" Type="Int32" />
+          <Property Name="DownloadKunCoinObtain" Type="Int32" />
+          <Property Name="LabelID" Type="Int32" />
+          <Property Name="DownloadTime" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="suffix" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Favorite">
+          <Key>
+            <PropertyRef Name="FavoriteID" />
+          </Key>
+          <Property Name="FavoriteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="BlogID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Followers">
+          <Key>
+            <PropertyRef Name="FollowersID" />
+          </Key>
+          <Property Name="FollowersID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FollowersUserID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="History">
+          <Key>
+            <PropertyRef Name="HistoryID" />
+          </Key>
+          <Property Name="HistoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BlogID" Type="Int32" />
+          <Property Name="HistoryTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Information">
+          <Key>
+            <PropertyRef Name="InformationID" />
+          </Key>
+          <Property Name="InformationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="IfQuantity" Type="Int32" />
+          <Property Name="IfWhether" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Issue">
+          <Key>
+            <PropertyRef Name="IssueID" />
+          </Key>
+          <Property Name="IssueID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="IssueContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Issuedetails" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="IssueDateTime" Type="DateTime" Precision="3" />
+          <Property Name="IssueQuantity" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Label">
+          <Key>
+            <PropertyRef Name="LabelID" />
+          </Key>
+          <Property Name="LabelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="LabelText" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="MessagesID" />
+          </Key>
+          <Property Name="MessagesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="MessagesText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="FromUserID" Type="Int32" />
+          <Property Name="ToUserID" Type="Int32" />
+          <Property Name="MessagesTime" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Notice">
+          <Key>
+            <PropertyRef Name="NoticeID" />
+          </Key>
+          <Property Name="NoticeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NoticeText" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="NoticeImage" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Reply">
+          <Key>
+            <PropertyRef Name="ReplyID" />
+          </Key>
+          <Property Name="ReplyID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IssueID" Type="Int32" />
+          <Property Name="ReplyContent" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="ReplyTime" Type="DateTime" Precision="3" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="ReplyLike" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Search">
+          <Key>
+            <PropertyRef Name="SearchID" />
+          </Key>
+          <Property Name="SearchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SearchName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="SearchCount" Type="Int32" />
+        </EntityType>
+        <EntityType Name="UserInfo">
+          <Key>
+            <PropertyRef Name="UserID" />
+          </Key>
+          <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserAccount" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UserPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UserBirthday" Type="DateTime" Precision="3" />
+          <Property Name="UserPhone" Type="String" MaxLength="11" FixedLength="false" Unicode="true" />
+          <Property Name="UserAddress" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserProfile" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="UserLabel" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="UserAvatarUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="UserVIP" Type="Int32" />
+          <Property Name="UserKunCoin" Type="Int32" />
+          <Property Name="UserExperience" Type="Int32" />
+          <Property Name="UserlastLoginTime" Type="DateTime" Precision="0" />
+          <Property Name="FollowersCount" Type="Int32" />
+          <Property Name="FavoriteCount" Type="Int32" />
+          <Property Name="DownloadKunCoinObtainCount" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="BoKeDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Blog" EntityType="Self.Blog" />
+          <EntitySet Name="CommentsB" EntityType="Self.CommentsB" />
+          <EntitySet Name="CommentsD" EntityType="Self.CommentsD" />
+          <EntitySet Name="Community" EntityType="Self.Community" />
+          <EntitySet Name="Concern" EntityType="Self.Concern" />
+          <EntitySet Name="courseel" EntityType="Self.courseel" />
+          <EntitySet Name="Download" EntityType="Self.Download" />
+          <EntitySet Name="Favorite" EntityType="Self.Favorite" />
+          <EntitySet Name="Followers" EntityType="Self.Followers" />
+          <EntitySet Name="History" EntityType="Self.History" />
+          <EntitySet Name="Information" EntityType="Self.Information" />
+          <EntitySet Name="Issue" EntityType="Self.Issue" />
+          <EntitySet Name="Label" EntityType="Self.Label" />
+          <EntitySet Name="Messages" EntityType="Self.Messages" />
+          <EntitySet Name="Notice" EntityType="Self.Notice" />
+          <EntitySet Name="Reply" EntityType="Self.Reply" />
+          <EntitySet Name="Search" EntityType="Self.Search" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" />
+          <EntitySet Name="BlogLike" EntityType="BoKeDBModel.BlogLike" />
+          <EntitySet Name="Communitymember" EntityType="BoKeDBModel.Communitymember" />
+          <EntitySet Name="course" EntityType="BoKeDBModel.course" />
+        </EntityContainer>
+        <EntityType Name="BlogLike">
+          <Key>
+            <PropertyRef Name="BlogLikeID" />
+          </Key>
+          <Property Name="BlogLikeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BolgID" Type="Int32" />
+          <Property Name="UserID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Communitymember">
+          <Key>
+            <PropertyRef Name="CommunitymemberID" />
+          </Key>
+          <Property Name="CommunitymemberID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserID" Type="Int32" />
+          <Property Name="CommunityID" Type="Int32" />
+        </EntityType>
+        <EntityType Name="course">
+          <Key>
+            <PropertyRef Name="courseId" />
+          </Key>
+          <Property Name="courseId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="courseName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="coursePicUrl" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="originalPrice" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="courseHit" Type="Int32" />
+          <Property Name="courseDec" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BoKeDBModelStoreContainer" CdmEntityContainer="BoKeDBEntities">
+          <EntitySetMapping Name="Blog">
+            <EntityTypeMapping TypeName="BoKeDBModel.Blog">
+              <MappingFragment StoreEntitySet="Blog">
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+                <ScalarProperty Name="BlogDec" ColumnName="BlogDec" />
+                <ScalarProperty Name="BlogContent" ColumnName="BlogContent" />
+                <ScalarProperty Name="BlogTitle" ColumnName="BlogTitle" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="BlogClicks" ColumnName="BlogClicks" />
+                <ScalarProperty Name="BlogTime" ColumnName="BlogTime" />
+                <ScalarProperty Name="BlogImageUrl" ColumnName="BlogImageUrl" />
+                <ScalarProperty Name="BlogLike" ColumnName="BlogLike" />
+                <ScalarProperty Name="BlogForword" ColumnName="BlogForword" />
+                <ScalarProperty Name="LabelID" ColumnName="LabelID" />
+                <ScalarProperty Name="LastTime" ColumnName="LastTime" />
+                <ScalarProperty Name="LastClicks" ColumnName="LastClicks" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommentsB">
+            <EntityTypeMapping TypeName="BoKeDBModel.CommentsB">
+              <MappingFragment StoreEntitySet="CommentsB">
+                <ScalarProperty Name="CommentsBID" ColumnName="CommentsBID" />
+                <ScalarProperty Name="CommentsBContent" ColumnName="CommentsBContent" />
+                <ScalarProperty Name="CommentsBLike" ColumnName="CommentsBLike" />
+                <ScalarProperty Name="BolgID" ColumnName="BolgID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CommentsD">
+            <EntityTypeMapping TypeName="BoKeDBModel.CommentsD">
+              <MappingFragment StoreEntitySet="CommentsD">
+                <ScalarProperty Name="CommentsDID" ColumnName="CommentsDID" />
+                <ScalarProperty Name="CommentsDContent" ColumnName="CommentsDContent" />
+                <ScalarProperty Name="CommentsDLike" ColumnName="CommentsDLike" />
+                <ScalarProperty Name="BolgID" ColumnName="BolgID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Community">
+            <EntityTypeMapping TypeName="BoKeDBModel.Community">
+              <MappingFragment StoreEntitySet="Community">
+                <ScalarProperty Name="CommunityID" ColumnName="CommunityID" />
+                <ScalarProperty Name="CommunityName" ColumnName="CommunityName" />
+                <ScalarProperty Name="CommunityDec" ColumnName="CommunityDec" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Concern">
+            <EntityTypeMapping TypeName="BoKeDBModel.Concern">
+              <MappingFragment StoreEntitySet="Concern">
+                <ScalarProperty Name="ConcernID" ColumnName="ConcernID" />
+                <ScalarProperty Name="ConcernUserID" ColumnName="ConcernUserID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="courseel">
+            <EntityTypeMapping TypeName="BoKeDBModel.courseel">
+              <MappingFragment StoreEntitySet="courseel">
+                <ScalarProperty Name="courseelId" ColumnName="courseelId" />
+                <ScalarProperty Name="courseelpf" ColumnName="courseelpf" />
+                <ScalarProperty Name="courseelcontent" ColumnName="courseelcontent" />
+                <ScalarProperty Name="courseId" ColumnName="courseId" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Download">
+            <EntityTypeMapping TypeName="BoKeDBModel.Download">
+              <MappingFragment StoreEntitySet="Download">
+                <ScalarProperty Name="suffix" ColumnName="suffix" />
+                <ScalarProperty Name="DownloadTime" ColumnName="DownloadTime" />
+                <ScalarProperty Name="LabelID" ColumnName="LabelID" />
+                <ScalarProperty Name="DownloadID" ColumnName="DownloadID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="frequency" ColumnName="frequency" />
+                <ScalarProperty Name="DownloadPath" ColumnName="DownloadPath" />
+                <ScalarProperty Name="DownloadName" ColumnName="DownloadName" />
+                <ScalarProperty Name="DownloadDec" ColumnName="DownloadDec" />
+                <ScalarProperty Name="DownloadKunCoin" ColumnName="DownloadKunCoin" />
+                <ScalarProperty Name="DownloadKunCoinObtain" ColumnName="DownloadKunCoinObtain" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Favorite">
+            <EntityTypeMapping TypeName="BoKeDBModel.Favorite">
+              <MappingFragment StoreEntitySet="Favorite">
+                <ScalarProperty Name="FavoriteID" ColumnName="FavoriteID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Followers">
+            <EntityTypeMapping TypeName="BoKeDBModel.Followers">
+              <MappingFragment StoreEntitySet="Followers">
+                <ScalarProperty Name="FollowersID" ColumnName="FollowersID" />
+                <ScalarProperty Name="FollowersUserID" ColumnName="FollowersUserID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="History">
+            <EntityTypeMapping TypeName="BoKeDBModel.History">
+              <MappingFragment StoreEntitySet="History">
+                <ScalarProperty Name="HistoryID" ColumnName="HistoryID" />
+                <ScalarProperty Name="BlogID" ColumnName="BlogID" />
+                <ScalarProperty Name="HistoryTime" ColumnName="HistoryTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Information">
+            <EntityTypeMapping TypeName="BoKeDBModel.Information">
+              <MappingFragment StoreEntitySet="Information">
+                <ScalarProperty Name="InformationID" ColumnName="InformationID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="IfQuantity" ColumnName="IfQuantity" />
+                <ScalarProperty Name="IfWhether" ColumnName="IfWhether" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Issue">
+            <EntityTypeMapping TypeName="BoKeDBModel.Issue">
+              <MappingFragment StoreEntitySet="Issue">
+                <ScalarProperty Name="IssueID" ColumnName="IssueID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="IssueContent" ColumnName="IssueContent" />
+                <ScalarProperty Name="Issuedetails" ColumnName="Issuedetails" />
+                <ScalarProperty Name="IssueDateTime" ColumnName="IssueDateTime" />
+                <ScalarProperty Name="IssueQuantity" ColumnName="IssueQuantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Label">
+            <EntityTypeMapping TypeName="BoKeDBModel.Label">
+              <MappingFragment StoreEntitySet="Label">
+                <ScalarProperty Name="LabelID" ColumnName="LabelID" />
+                <ScalarProperty Name="LabelText" ColumnName="LabelText" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="BoKeDBModel.Messages">
+              <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="MessagesID" ColumnName="MessagesID" />
+                <ScalarProperty Name="MessagesText" ColumnName="MessagesText" />
+                <ScalarProperty Name="FromUserID" ColumnName="FromUserID" />
+                <ScalarProperty Name="ToUserID" ColumnName="ToUserID" />
+                <ScalarProperty Name="MessagesTime" ColumnName="MessagesTime" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Notice">
+            <EntityTypeMapping TypeName="BoKeDBModel.Notice">
+              <MappingFragment StoreEntitySet="Notice">
+                <ScalarProperty Name="NoticeID" ColumnName="NoticeID" />
+                <ScalarProperty Name="NoticeText" ColumnName="NoticeText" />
+                <ScalarProperty Name="NoticeImage" ColumnName="NoticeImage" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reply">
+            <EntityTypeMapping TypeName="BoKeDBModel.Reply">
+              <MappingFragment StoreEntitySet="Reply">
+                <ScalarProperty Name="ReplyID" ColumnName="ReplyID" />
+                <ScalarProperty Name="IssueID" ColumnName="IssueID" />
+                <ScalarProperty Name="ReplyContent" ColumnName="ReplyContent" />
+                <ScalarProperty Name="ReplyTime" ColumnName="ReplyTime" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="ReplyLike" ColumnName="ReplyLike" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Search">
+            <EntityTypeMapping TypeName="BoKeDBModel.Search">
+              <MappingFragment StoreEntitySet="Search">
+                <ScalarProperty Name="SearchID" ColumnName="SearchID" />
+                <ScalarProperty Name="SearchName" ColumnName="SearchName" />
+                <ScalarProperty Name="SearchCount" ColumnName="SearchCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfo">
+            <EntityTypeMapping TypeName="BoKeDBModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserAccount" ColumnName="UserAccount" />
+                <ScalarProperty Name="UserPassword" ColumnName="UserPassword" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserBirthday" ColumnName="UserBirthday" />
+                <ScalarProperty Name="UserPhone" ColumnName="UserPhone" />
+                <ScalarProperty Name="UserAddress" ColumnName="UserAddress" />
+                <ScalarProperty Name="UserProfile" ColumnName="UserProfile" />
+                <ScalarProperty Name="UserLabel" ColumnName="UserLabel" />
+                <ScalarProperty Name="UserAvatarUrl" ColumnName="UserAvatarUrl" />
+                <ScalarProperty Name="UserVIP" ColumnName="UserVIP" />
+                <ScalarProperty Name="UserKunCoin" ColumnName="UserKunCoin" />
+                <ScalarProperty Name="UserExperience" ColumnName="UserExperience" />
+                <ScalarProperty Name="UserlastLoginTime" ColumnName="UserlastLoginTime" />
+                <ScalarProperty Name="FollowersCount" ColumnName="FollowersCount" />
+                <ScalarProperty Name="FavoriteCount" ColumnName="FavoriteCount" />
+                <ScalarProperty Name="DownloadKunCoinObtainCount" ColumnName="DownloadKunCoinObtainCount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BlogLike">
+            <EntityTypeMapping TypeName="BoKeDBModel.BlogLike">
+              <MappingFragment StoreEntitySet="BlogLike">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="BolgID" ColumnName="BolgID" />
+                <ScalarProperty Name="BlogLikeID" ColumnName="BlogLikeID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Communitymember">
+            <EntityTypeMapping TypeName="BoKeDBModel.Communitymember">
+              <MappingFragment StoreEntitySet="Communitymember">
+                <ScalarProperty Name="CommunityID" ColumnName="CommunityID" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="CommunitymemberID" ColumnName="CommunitymemberID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="course">
+            <EntityTypeMapping TypeName="BoKeDBModel.course">
+              <MappingFragment StoreEntitySet="course">
+                <ScalarProperty Name="courseDec" ColumnName="courseDec" />
+                <ScalarProperty Name="courseHit" ColumnName="courseHit" />
+                <ScalarProperty Name="originalPrice" ColumnName="originalPrice" />
+                <ScalarProperty Name="coursePicUrl" ColumnName="coursePicUrl" />
+                <ScalarProperty Name="courseName" ColumnName="courseName" />
+                <ScalarProperty Name="courseId" ColumnName="courseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

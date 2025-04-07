@@ -1,0 +1,178 @@
+﻿body {
+    padding-top: 65px;
+    min-width: 800px;
+}
+
+#app {
+    width: 80%;
+    margin: 0px auto;
+}
+#Search_Box li:hover{
+    background:#808080;
+}
+#Search_Box {
+    padding: 5px;
+    background-color: white;
+    height: 50%;
+    position: fixed;
+    top: 60px;
+    width: 15%;
+    left: 40%;
+    opacity: 0.8;
+    display:none;
+ 
+}
+
+    #Search_Box li {
+        height: 30px;
+        line-height: 30px;
+        cursor:pointer;
+    }
+
+#Home-Personal_Data div {
+    width: 400px;
+    position: fixed;
+    top: 60px;
+    right: 5%;
+    height: 120px;
+}
+
+
+    #Home-Personal_Data div dl {
+        position: absolute;
+        top: 0;
+        height: 100%;
+    }
+
+#Home_Close {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    transition: 1s;
+}
+
+    #Home_Close:hover {
+        color: red;
+        transition: 1s;
+    }
+
+#Home-Personal_Data img {
+    text-align: center;
+    height: 40px;
+    width: 40px;
+    top: -1px;
+    position: relative;
+    line-height: 60px;
+    border-radius: 50%;
+    transition: 1s;
+    z-index: 99999;
+}
+
+
+
+
+
+
+
+.Home-head {
+    background-color: #ffffff;
+    height: 60px;
+    line-height: 60px;
+    box-shadow: #bcbcbc 2px 2px 5px 5px;
+    margin-bottom: 5px;
+    z-index: 100;
+    box-sizing: border-box;
+    min-width: 800px;
+}
+
+.Home-none {
+    box-sizing: border-box;
+    border: none;
+    border-radius: 0px;
+    padding: 0px;
+    margin: 0px;
+}
+
+.Home-flex {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    width: 25%;
+}
+
+.Home-flex-start {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+}
+
+.logo {
+    text-align: center;
+    width: 10%;
+}
+
+#Home-input-Search {
+    width: 100%;
+    border-right: none;
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    height: 40px;
+    margin: auto 0px;
+}
+
+#Home-input-Btn {
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    border-left: none;
+    background-color: #FC5531;
+    height: 40px;
+    margin: auto 0px;
+    outline: none;
+    width: 80px;
+    text-align: center;
+    color: white;
+}
+
+.Home-Search-btn {
+    width: 25%;
+}
+
+.Home-hide {
+    display: none;
+}
+
+.logo img {
+    width: 70%;
+    position: relative;
+    top: -5px;
+}
+
+.Home-ul {
+    margin: 0px auto;
+    background-color: #FFFFFF;
+}
+
+.Home-ul-li-a {
+    color: #000000;
+    font-size: 12px;
+}
+
+#Home-Personal_Data {
+    overflow: visible;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+
+.Home-head .Home-ul li {
+    width: 100%;
+    text-align: center;
+    overflow: hidden;
+    color: black;
+    cursor: pointer;
+}
+
+.Home-ul-box {
+    width: 30%;
+}

@@ -1,0 +1,143 @@
+﻿.Home-Search-btn
+{
+    display:none;
+}
+body {
+    width: 100%;
+    background-color:#f8f9fa;
+}
+#Search-header {
+    display: flex;
+    flex-flow: row nowrap;
+    height: 60px;
+    background-color: white;
+    position: fixed;
+    z-index: 10;
+    width: 1215px;
+    border: 1px solid #efefef;
+}
+#Search-input-Btn {
+    background-color: #FC5531;
+    height: 45px;
+    margin: auto 0px;
+    outline: none;
+    width: 120px;
+    text-align: center;
+    color: white;
+}
+#Search-input-Search_ALL {
+    margin-left:20px;
+    height: 45px;
+    width:915px;
+    margin:auto 10px;
+}
+
+#Search-banner-dh {
+    border-block-end: solid 1px;
+    border-block-end-color: rgb(242,242,242);
+    background-color: white;
+    width: 100%;
+    margin-top: 15px;
+}
+
+.Search-Style {
+    background-color: white;
+    height:60px;
+    line-height:60px;
+}
+    .Search-Style li {
+        height: 60px;
+        line-height:60px;
+        cursor: pointer;
+        text-align: center;
+    }
+.Search-none {
+
+}
+.Search-flex {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-around;
+    width: 5%;
+    color:black;
+}
+.Search-xdh-flex {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-left:22px;
+}
+.Search-null{
+    height:60px;
+}
+#Search-banner {
+    width: 100%;
+    height: 1200px;
+    background-color: white;
+}
+#Search_app {
+    width:100%;
+    height: 100%;
+    background-color: white;
+}   
+.Search-xdh {
+    width: 35px;
+    height: 25px;
+    line-height: 25px;
+    padding: 0px;
+    margin:10px 20px 12px 0px;
+}
+.Search-xdh-sgss{
+    margin:10px 0px 0px 700px;  
+}
+#Search-banner-item {
+    width: 100%;
+    padding: 16px 24px;
+    border-block-end: solid 1px;
+    border-block-end-color: rgb(242,242,242);
+}
+.Search-banner-item-hd {
+    margin-bottom:5px;
+}
+.Search-banner-item-bd {
+    margin-top: 10px;
+}
+.bdc-lt {
+    display: flex;
+    flex-flow: row nowrap;
+}
+.bdc-ft {
+    width: 75%;
+    margin-top: 5px;
+}
+.ft-bottom {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-top: 10px;
+    height: 25px;
+    line-height: 25px;
+    justify-content: space-between;
+    align-items: center;
+    width:90%;
+}
+.btm-lt {
+    display: flex;
+    flex-flow: row nowrap;
+}
+.btm-rt {
+    display: flex;
+    flex-flow: row nowrap;
+}
+.btm-lt-ck {
+    margin-right: 40px;
+}
+.btm-rt-zz{
+    margin-right:70px;
+}
+.bdc-img {
+    width: 100%;
+}
+.bdc-it {
+    width: 130px;
+    height: 75px;
+}
+

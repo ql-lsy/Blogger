@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Home.cshtml";
+}
+
+@*需要先引入jQuery文件*@
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.js"></script>
+
+@*引入layui*@
+<link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+<script src="~/Content/layui/layui.js"></script>
+
+@*引入css与js*@
+<link href="~/Content/css/my-Global.css" rel="stylesheet" />
+<link href="~/Content/css/Home-css1.css" rel="stylesheet" />
+<style type="text/css">
+</style>
+
+<div id="Creation_app">
+    <link href="~/Content/css/Creation_css1.css" rel="stylesheet" />
+    <link href="~/Content/css/Creation_Global.css" rel="stylesheet" />
+    <div class="layui-carousel a7" id="ID-carousel-demo-image">
+        <div class="panel panel-default">
+            <img src="~/img/课程/1.png" />
+            <img src="~/img/课程/2.png" />
+        </div>
+        <div class="panel panel-default">
+            <img src="~/img/课程/1.png" />
+            <img src="~/img/课程/2.png" />
+        </div>
+    </div>
+</div>
+
+<div id="Creation_app" class="content-section">活动中心内容</div>
+<div id="volunteer_content" class="content-section">志愿活动内容</div>
+<div id="academic_content" class="content-section">学术活动内容</div>
+<div id="art_content" class="content-section">文艺活动内容</div>
+<div id="entrepreneurship_content" class="content-section">创新创业活动内容</div>
+<div id="management_content" class="content-section">内容管理</div>
+<div id="number_content" class="content-section">报名人员</div>
+@Html.Partial("activity_menu")

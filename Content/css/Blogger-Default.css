@@ -1,0 +1,51 @@
+﻿body {
+    background-color: #f8f9fa;
+}
+.Blogger-Type-btn {
+    margin-top: 10px;
+    background-color: #fff;
+    padding: 12px 24px;
+    text-align: center;
+    border: 1px solid #eaeaea;
+}
+.item-bg-bd {
+    background-color: white;
+    border: 1px solid #eaeaea;
+    width:80%;
+}
+#Home-Blogger-item {
+    width: 100%;
+    height: 1200px;
+    background-color: white;
+    padding: 10px 5px;
+}
+.Home-Blogger-active:hover {
+    background-color: aliceblue;
+}
+    .Home-Blogger-active {
+        width: 95%;
+        height: 140px;
+        /*    background-color: aquamarine;*/
+        padding: 20px 10px;
+        display: flex;
+        flex-flow: row nowrap;
+        border-block-end: solid 1px;
+        border-block-end-color: rgb(242,242,242);
+    }
+.Blogger-active-content{
+    width:80%;
+    height:100%;
+    padding-left:20px;
+}
+.Blogger-active-right{
+    width:20%;
+    height:100%;
+}
+.active-content-text{
+    width:95%;
+    height:50%;
+}
+
+
+
+

@@ -1,0 +1,106 @@
+﻿
+@{
+    ViewBag.Title = "Download";
+    Layout = "~/Views/Shared/Home.cshtml";
+}
+<link href="~/Content/css/DownLoad.css" rel="stylesheet" />
+
+
+
+<div id="zhengti">
+
+</div>
+<script>
+    $(function () {
+
+        function downloadFile(url) {
+            var a = document.createElement('a');
+            a.href = url;
+            a.target = '_blank';
+            document.body.appendChild(a);
+            a.click();
+        }
+
+        var divID = document.getElementById("zhengti");
+        $.ajax({
+            type: "Get",
+            url: "/Api/ApiDownload",
+            success: function (res) {
+                for (var j = 0; j < res.length; j++) {
+                    var newDiv = document.createElement("div");
+                    newDiv.className = "xiazai";
+                    newDiv.style.marginLeft = "20px";
+                    newDiv.style.lineHeight = "40px";
+                    newDiv.innerHTML = '<hr />' + '<h3>' + res[j].name + '</h3>' +
+                        '<button type="button" class="layui-btn layui-btn-primary layui-btn-xs">' + res[j].Label + '</button>'
+                        + '<p>' + "需积分:" + '<label>' + res[j].KunCoin + '</label>' + '<label style="margin-left:10px;">' + res[j].Time + '</label>' + "上传"
+                        + '<label style="margin-left:10px; margin-right:20px;">' + res[j].Url + '</label>' + '<button type="button" class="layui-btn layui-btn-normal layui-btn-radius bouuton" data-kuncoin="' + res[j].KunCoin + '" data-uploaderid="' + res[j].uid + '" id="xz">' + "立即下载" + '</button>'
+                        + '</p>'
+                        + '<p class="news_info" title="' + res[j].Des + '">'
+                        + res[j].Des
+                        + '</p>';
+                    divID.appendChild(newDiv);
+
+                    // 添加下载按钮的点击事件data-kuncoin="' + res[j].KunCoin + '"
+                    var button = newDiv.querySelector('#xz');
+                    var did = "";
+                    button.addEventListener('click', function () {
+                        
+                        var index = this.getAttribute('data-index');
+                        did = res[index].did;
+                        //alert(did);
+                        var url = '../Upload/Update/' + res[index].Url + res[index].suffix1;
+                        var kuncoin = this.getAttribute('data-kuncoin');
+                        var uploaderid = this.getAttribute('data-uploaderid'); // 获取上传文件的用户 ID
+                        $.ajax({
+                            type: "GET",
+                            url: "/Api/ApiUpdate/KuncoinGet",
+                            data: {
+                                UserKunCoin: kuncoin
+                            },
+                            success: function (res) {
+                                if (res) {
+                                    downloadFile(url);
+                                    addKuncoin(uploaderid, kuncoin,did);
+                                } else {
+                                    alert("币不足无法下载");
+                                }
+
+                            }, error: function (xhr, status, error) {
+                                console.error(xhr.responseText); // 打印错误信息
+                            }
+                        });
+
+
+                        // 在这里处理积分的逻辑
+                    });
+                    // 保存 j 的值到 index 变量中
+                    button.setAttribute('data-index', j);
+                    function addKuncoin(uploaderid, kuncoin,did) {
+                        $.ajax({
+                            type: "GET",
+                            url: "/Api/ApiUpdate/AddKuncoinGet",
+                            data: {
+                                uploaderid: uploaderid,
+                                kuncoin: kuncoin,
+                                did: did
+                            },
+                            success: function (res) {
+                                if (res) {
+                                    console.log('增加币成功');
+                                } else {
+                                    console.log('增加币失败');
+                                }
+                            }, error: function (xhr, status, error) {
+                                console.error(xhr.responseText); // 打印错误信息
+                            }
+
+                        });
+                    }
+                }
+            }
+        });
+    });
+
+
+</script>

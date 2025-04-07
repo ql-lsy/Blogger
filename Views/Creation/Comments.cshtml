@@ -1,0 +1,36 @@
+﻿
+@{
+    ViewBag.Title = "Comments";
+    Layout = "~/Views/Shared/Home.cshtml";
+}
+
+<div id="Creation_app">
+    <!--Creation记录开始-->
+
+
+    <link href="~/Content/css/Creation_Global.css" rel="stylesheet" />
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>评论管理</legend>
+    </fieldset>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <ul class="layui-tab layui-tab-title">
+                <li id="Creation_Comments_myto" class="layui-this">我的评论</li>
+                <li id="Creation_Comments_tomy">评论我的</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="panel-body">
+                    <table lay-filter="Creation_Comments_TB" class="layui-table">
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="~/Scripts/JS/Creation_Comments_js2.js"></script>
+    <script src="~/Scripts/JS/Creation_Comments_js1.js"></script>
+
+    <!--Creation记录结束-->
+</div>
+@Html.Partial("Creation_menu")

@@ -1,0 +1,54 @@
+﻿
+@{
+    ViewBag.Title = "Earnings";
+    Layout = "~/Views/Shared/Home.cshtml";
+}
+
+<div id="Creation_app">
+    <!--Creation记录开始-->
+    <link href="~/Content/css/Creation_Global.css" rel="stylesheet" />
+    <link href="~/Content/css/Creation_css1.css" rel="stylesheet" />
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>收益数据</legend>
+    </fieldset>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            创作详情
+        </div>
+        <div class="panel-body Home-flex Creation_head">
+            <ul>
+                <li>总阅读量</li>
+                <li id="Creation_Reading" class="Creation_count">0</li>
+                <li id="Creation_Reading_variation" class="Creation_variation">
+                    <span>今日无变化</span>
+                </li>
+            </ul>
+            <ul>
+                <li>累计收益</li>
+                <li id="Creation_earnings" class="Creation_count">0￥</li>
+                <li id="Creation_earnings_variation" class="Creation_variation"><span>今日无变化</span></li>
+            </ul>
+            <ul>
+                <li>粉丝数</li>
+                <li id="Creation_followers" class="Creation_count">0</li>
+                <li id="Creation_followers_variation" class="Creation_variation"><span>今日无变化</span></li>
+            </ul>
+            <ul>
+                <li>收藏</li>
+                <li id="Creation_collection" class="Creation_count">0</li>
+                <li id="Creation_collection_variation" class="Creation_variation"><span>今日无变化</span></li>
+            </ul>
+        </div>
+        <div class="panel-body" style="text-align:right">
+            继续加油哦
+        </div>
+    </div>
+    <div id="Earnings_TimeLine" class="panel panel-default">
+
+    </div>
+
+    <script src="~/Scripts/JS/Opus_js.js"></script>
+    <!--Creation记录结束-->
+</div>
+@Html.Partial("Creation_menu")
+

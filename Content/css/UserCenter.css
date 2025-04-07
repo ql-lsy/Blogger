@@ -1,0 +1,34 @@
+﻿body {
+    background-color: #f8f9fa;
+}
+#Home-UserCenter-Header {
+    width: 100%;
+    height: 200px;
+    background-color: white;
+    margin-top:70px;
+    padding:25px 20px 20px 20px;
+    display:flex;
+    flex-flow:row;
+}
+.UserCenter-Header-banner{
+    margin-top:10px;
+    margin-left:30px;
+}
+.UserCenter-Header-img {
+    width: 94px;
+    height: 94px;
+}
+.Header-banner-user{
+    font-size:24px;
+}
+.Header-banner-xx{
+    margin-top:10px;
+}
+.Header-banner-xx ul {
+    display: flex;
+    flex-flow: row;
+    font-size: 18px;
+}
+.Header-banner-xx ul li{
+    margin-left:18px;
+}

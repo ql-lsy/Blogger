@@ -1,0 +1,221 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Home.cshtml";
+}
+
+@*需要先引入jQuery文件*@
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.js"></script>
+
+@*引入layui*@
+<link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+<script src="~/Content/layui/layui.js"></script>
+
+@*引入css与js*@
+<link href="~/Content/css/my-Global.css" rel="stylesheet" />
+<link href="~/Content/css/Home-css1.css" rel="stylesheet" />
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+
+    <style type="text/css">
+        div {
+            color: white;
+        }
+
+        #app {
+            width: 100%;
+        }
+    </style>
+
+    <script>
+        $(function () {
+            var test = window.location.search;
+            test = test.substring(test.indexOf("=")+1, test.length);
+            $.ajax({
+                type: "Get",
+                url: "/api/ApiStudy/",
+                data: { ID: test },
+                dataType: "json",
+                success: function (res) {
+                }
+            })
+        });
+       $( function()
+        {
+            layui.use('rate', function () {
+                var rate = layui.rate;
+                rate.render({
+                    elem: '#test2'
+                    , value: 2 //初始值
+                    , text: true //开启文本
+                    , choose: function (value) {
+                        a = value;
+                        console.log(value); // 打印选择的评分值
+                    }
+                });
+                //渲染
+                //var ins1 = rate.render({
+                //    elem: '#test2'  //绑定元素
+                //});
+            });
+
+
+            var ins1 = rate.render({
+                elem: '#test2'  //绑定元素
+            });
+
+           /* var value = ins1.value; //获取当前评分的值*/
+
+       })
+        var a="";
+        function quren() {
+            alert("wert");
+            var test = window.location.search;
+            test = test.substring(test.indexOf("=") + 1, test.length);
+            //alert(test);
+            //alert($("#TextArea1").val());
+            $.ajax({
+                type: "Get",
+                url: "/api/Apiclasspf",
+                data: { courseelpf: a, courseelcontent: $("#TextArea1").val(),courseId: test },
+                dataType: "json",
+                success: function (res) {
+                    if (res) {
+                    }
+                }
+            })
+        }
+        //显示文字
+        layui.use('rate', function () {
+            var rate = layui.rate;
+            rate.render({
+                elem: '#test2'
+                , value: 2 //初始值
+                , text: true //开启文本
+                ,choose: function (value) {
+                    console.log(value); // 打印选择的评分值
+                }
+            });
+            //渲染
+            var ins1 = rate.render({
+                elem: '#test2'  //绑定元素
+            });
+        });
+        layui.use('element', function () {
+            var $ = layui.jquery
+                , element = layui.element; //Tab的切换功能，切换事件监听等，需要依赖element模块
+
+            //触发事件
+            var active = {
+                tabAdd: function () {
+                    //新增一个Tab项
+                    element.tabAdd('demo', {
+                        title: '新选项' + (Math.random() * 1000 | 0) //用于演示
+                        , content: '内容' + (Math.random() * 1000 | 0)
+                        , id: new Date().getTime() //实际使用一般是规定好的id，这里以时间戳模拟下
+                    })
+                }
+                , tabChange: function () {
+                    //切换到指定Tab项
+                    element.tabChange('demo', '22'); //切换到：用户管理
+                }
+            };
+
+
+            $('.site-demo-active').on('click', function () {
+                var othis = $(this), type = othis.data('type');
+                active[type] ? active[type].call(this, othis) : '';
+            });
+
+            //Hash地址的定位
+            var layid = location.hash.replace(/^#test=/, '');
+            element.tabChange('test', layid);
+
+            element.on('tab(test)', function (elem) {
+                location.hash = 'test=' + $(this).attr('lay-id');
+            });
+
+        });
+      $(  function() {
+            var divID = document.getElementById("chaxun");
+            chaxun.innerHTML = "";
+                $.ajax({
+                    type: "Get",
+                    url: "/Api/Apichaxun",
+                    success: function (res) {
+
+                        for (var j = 0; j < res.length; j++) {
+
+                            divID.innerHTML += '<div style="width:950px; height:70px; padding:5px;">'
+                                + '<span>' + '<img src="/UpLoad/UserImage/' + res[j].userimg+'" style="border-radius:50%; height:50px" />'
+                                + '<a href="#" style="margin-left:5px;">' + res[j].UserName + '</a>' + '<span style="margin-left:5px;">' + '</span>' + '</span>'
+                                + ' <p style="position:relative;top:-20px;left:50px">' + "课程评分" + '：' + res[j].courseelpf + '星 <p style="position:relative;top:-20px;left:50px">课程评价：' + res[j].courseelcontent;
+
+
+                        }
+                    }
+                })
+            })
+
+    </script>
+
+</head>
+<body>
+    @using Blogger.Models;
+    <div style="background-color:black;width:100%;height:300px">
+        <a style="width:400px;height:100px;line-height:100px;border:1px solid gray;border-radius:50px;color:white;text-decoration:none;" href="/Learn/Index">返回课程列表</a>
+        <div>
+            @foreach (var item in ViewData["cc"] as List<course>)
+            {
+                <h1 style="text-align:center;padding-top:30px">[@item.courseName]</h1>
+
+                <p style="text-align:center">
+                    课程价格：￥@item.originalPrice
+                    <span style="margin-left:100px">课程点击书：@item.courseHit</span>
+                </p>
+            }
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">课程简介:</li>
+                <li>课程评价</li>
+            </ul>
+            <div class="layui-tab-content" style="height: 1000px;">
+                <div class="layui-tab-item layui-show" style="background-color:grey;width:100%;height:100px;margin-top:-15px">
+                    @foreach (var item in ViewData["cc"] as List<course>)
+                    {
+
+                        <p style="padding:10px">
+                            课程简介：@item.courseDec
+                        </p>
+                    }
+
+                </div>
+
+                <div class="layui-tab-item" style="background-color:grey;width:100%;height:1000px;margin-top:-15px">
+                    <h3>发表评分</h3>
+                    <div>评分：<div id="test2" style="color:black"></div></div>
+                    <div>
+                        评价内容：<textarea id="TextArea1" rows="4" cols="40" style="color:black"></textarea>
+                        <button style="width:50px;height:30px;" onclick="quren()">确定</button>
+                    </div>
+                    <div>
+                        <p style="margin-top:10px">全部评论：</p>
+                        <div id="chaxun" style="margin-top:20px"></div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+</body>
+</html>
+
+

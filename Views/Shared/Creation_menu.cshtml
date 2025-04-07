@@ -1,0 +1,43 @@
+﻿<div class="layui-panel Creation_menu">
+    <button id="Creation_publish" class="layui-btn layui-btn-radius layui-btn-warm">发布 <i class="layui-icon layui-icon-down layui-font-12"></i></button>
+
+
+    <ul class="layui-menu" id="docDemoMenu1">
+        <li class="layui-menu-item-checked" lay-options="{id: 100}">
+            <div id="Creation_Home" class="layui-menu-body-title">首页</div>
+        </li>
+        <li class="layui-menu-item-group layui-menu-item-down" lay-options="{type: 'group'}">
+            <div class="layui-menu-body-title">
+                管理<i class="layui-icon layui-icon-up"></i>
+            </div>
+            <ul>
+                <li id="Creation_Content" lay-options="{id: 1001}">内容管理</li>
+                <li id="Creation_Comments" lay-options="{id: 1002}">
+                    <div class="layui-menu-body-title">评论管理</div>
+                </li>
+            </ul>
+
+        </li>
+
+        <li class="layui-menu-item-group layui-menu-item-down" lay-options="{type: 'group'}">
+            <div class="layui-menu-body-title">
+                数据<i class="layui-icon layui-icon-up"></i>
+            </div>
+            <ul>
+                <li id="Creation_Opus" lay-options="{id: 1003}">作品数据</li>
+                @*<li id="Creation_Earnings" lay-options="{id: 1004}">
+                        <div class="layui-menu-body-title">收益数据</div>
+                    </li>*@
+                <li id="Creation_Other" lay-options="{id: 1004}">
+                    <div class="layui-menu-body-title">近期数据</div>
+                </li>
+                @*<li id="Creation_Followers" lay-options="{id: 1005}">粉丝数据</li>*@
+            </ul>
+
+        </li>
+
+    </ul>
+</div>
+<link href="~/Content/css/Creation_menu_css1.css" rel="stylesheet" />
+<script src="~/Scripts/JS/Creation_menu_pulish.js"></script>
+<script src="~/Scripts/JS/Creation_Menu_Hand.js"></script>

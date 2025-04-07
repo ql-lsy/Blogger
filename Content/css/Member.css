@@ -1,0 +1,56 @@
+﻿
+.guiz-box {
+    border: 2px solid #f2d09b;
+    border-radius: 10px;
+    width: 80%;
+    margin: 20px auto;
+    height: 400px
+}
+
+    .guiz-box a {
+        color: #0094ff;
+    }
+
+.guiz-title {
+    font-size: 20px;
+    height: 25px;
+    line-height: 25px;
+    margin: 5px 20px
+}
+
+.guiz-lable {
+    font-size: 15px;
+    height: 25px;
+    line-height: 25px;
+    margin: 5px 20px
+}
+
+.popupvip {
+    height: 400px;
+    width: 50%;
+    background-color: white;
+    box-sizing: border-box;
+    border-radius: 20px;
+    position: fixed;
+    top: 20%;
+    left: 25%;
+    z-index: 9999;
+    display: none
+}
+
+.popupvip {
+    height: 400px;
+    width: 50%;
+    background-color: white;
+    box-sizing: border-box;
+    border-radius: 20px;
+    position: fixed;
+    top: 20%;
+    left: 25%;
+    z-index: 9999;
+    display: none
+}
+
+.xiaoshi1:checked ~ .click1 {
+    display: none
+}

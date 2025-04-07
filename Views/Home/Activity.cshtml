@@ -1,0 +1,151 @@
+﻿
+@{
+    ViewBag.Title = "Creation";
+    Layout = "~/Views/Shared/Home.cshtml";
+}
+<div id="Creation_app">
+    <!--Creation记录开始-->
+    <link href="~/Content/css/Creation_css1.css" rel="stylesheet" />
+    <link href="~/Content/css/Creation_Global.css" rel="stylesheet" />
+    <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+        <legend>近期数据</legend>
+    </fieldset>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            创作详情
+        </div>
+        <div class="panel-body Home-flex Creation_head">
+            <ul>
+                <li>总阅读量</li>
+                <li id="Creation_Reading" class="Creation_count">0</li>
+                <li id="Creation_Reading_variation" class="Creation_variation">
+                    <span>今日无变化</span>
+                </li>
+            </ul>
+            <ul>
+                <li>累计收益</li>
+                <li id="Creation_earnings" class="Creation_count">0￥</li>
+                <li id="Creation_earnings_variation" class="Creation_variation"><span>今日无变化</span></li>
+            </ul>
+            <ul>
+                <li>粉丝数</li>
+                <li id="Creation_followers" class="Creation_count">0</li>
+                <li id="Creation_followers_variation" class="Creation_variation"><span>今日无变化</span></li>
+            </ul>
+            <ul>
+                <li>收藏</li>
+                <li id="Creation_collection" class="Creation_count">0</li>
+                <li id="Creation_collection_variation" class="Creation_variation"><span>今日无变化</span></li>
+            </ul>
+        </div>
+        <div class="panel-body" style="text-align:right">
+            继续加油哦
+        </div>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <div class="layui-tab layui-tab-brief" lay-filter="qiehuan">
+                <ul class="layui-tab-title Creation_tab">
+                    <li class="layui-this">近期博客</li>
+                    <li>近期上传</li>
+                </ul>
+                <div class="layui-tab-content">
+                    <div id="Creation_Home_Blog_Box" class="layui-tab-item layui-show Creation_essay_box">
+                        <ul class="Creation_essay_item">
+                            <li>
+                                <a href="#">
+                                    <div class="panel-body Home-flex Creation_essay">
+                                        <ul class="Home-flex">
+                                            <li>
+                                                <h3>标题</h3>
+                                                <p>文章摘要</p>
+                                            </li>
+                                            <li>
+                                                <p>0</p>
+                                                <p>阅读量</p>
+                                            </li>
+                                            <li>
+                                                <p>0</p>
+                                                <p>评论数</p>
+                                            </li>
+                                            <li>
+                                                <p>0</p>
+                                                <p>点赞数</p>
+                                            </li>
+                                            <li>
+                                                <p>0</p>
+                                                <p>收藏数</p>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+
+                                </a>
+                            </li>
+                            <li>
+                                <div class="panel-body Home-flex Creation_essay">
+                                    <ul class="Home-flex">
+                                        <li>
+                                            <h3>标题</h3>
+                                            <p>文章摘要</p>
+                                        </li>
+                                        <li>
+                                            <p>0</p>
+                                            <p>阅读量</p>
+                                        </li>
+                                        <li>
+                                            <p>0</p>
+                                            <p>评论数</p>
+                                        </li>
+                                        <li>
+                                            <p>0</p>
+                                            <p>点赞数</p>
+                                        </li>
+                                        <li>
+                                            <p>0</p>
+                                            <p>收藏数</p>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div id="Creation_Home_Download_Box" class="layui-tab-item  Creation_essay_box">
+                        <ul class="Creation_DownLoad_item">
+                            <li>
+                                <a href="#">
+                                    <div class="panel-body Home-flex Creation_essay">
+                                        <ul class="Home-flex">
+                                            <li>
+                                                <h3>标题</h3>
+                                                <p>上传简介</p>
+                                            </li>
+                                            <li>
+                                                <p>0</p>
+                                                <p>下载数</p>
+                                            </li>
+                                            <li>
+                                                <p>0</p>
+                                                <p>价格</p>
+                                            </li>
+                                            <li>
+                                                <p>0</p>
+                                                <p>收益</p>
+                                            </li>
+                                        </ul>
+
+                                    </div>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Creation记录结束-->
+</div>
+@Html.Partial("Activity_menu")
+
+

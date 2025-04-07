@@ -1,0 +1,412 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Home.cshtml";
+}
+
+<script src="~/Content/layui/layui.js"></script>
+<link href="~/Content/css/Member.css" rel="stylesheet" />
+<link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+<style>
+    .content {
+        margin-top: 80px;
+        margin: 0px auto;
+    }
+    .layui-nav {
+        background-color: #fff
+    }
+    .guiz-box {
+        border: 2px solid #f2d09b;
+        border-radius: 10px;
+        width: 80%;
+        margin: 20px auto;
+        height: 400px
+    }
+
+        .guiz-box a {
+            color: #0094ff;
+        }
+
+    .guiz-title {
+        font-size: 20px;
+        height: 25px;
+        line-height: 25px;
+        margin: 5px 20px
+    }
+
+    .guiz-lable {
+        font-size: 15px;
+        height: 25px;
+        line-height: 25px;
+        margin: 5px 20px
+    }
+
+    .popupvip {
+        height: 400px;
+        width: 50%;
+        background-color: white;
+        box-sizing: border-box;
+        border-radius: 20px;
+        position: fixed;
+        top: 20%;
+        left: 25%;
+        z-index: 9999;
+        display: none
+    }
+
+    .daohang {
+        text-align: center;
+        font-size: 30px
+    }
+
+    .active {
+        width: 300px;
+        height: 200px
+    }
+
+    .tab-content {
+        margin: 0px auto;
+        text-align: center;
+        width: 90%
+    }
+
+        .tab-content div {
+            margin: 10px;
+        }
+
+
+    #app {
+        width: 100%
+    }
+
+    .t1 {
+        height: 60px;
+        line-height: 60px;
+        font-size: 25px
+    }
+
+    .t2 {
+        height: 40px;
+        line-height: 40px
+    }
+
+        .t2 span {
+            font-size: 30px
+        }
+
+    .card-foot {
+        height: 50px;
+        line-height: 50px;
+        background-color: #c3e7f5
+    }
+
+    .tab-box div {
+        float: left;
+        margin: 54px;
+    }
+
+    .active1 {
+        width: 600px
+    }
+
+    .t3 {
+        height: 60px;
+        padding: 10px;
+        line-height: 60px;
+        font-size: 25px
+    }
+
+    .guiz {
+        text-align: center;
+        font-size: 30px
+    }
+</style>
+<script>
+    $(function () {
+        $(".erweima1").click(function () {
+            $(".click1").slideDown(500);
+            $(".vipbox1").fadeIn(500);
+        })
+    })
+    $(function () {
+        $(".erweima2").click(function () {
+            $(".click2").slideDown(500);
+            $(".vipbox2").fadeIn(500);
+        })
+    })
+    $(function () {
+        $(".erweima3").click(function () {
+            $(".click3").slideDown(500);
+            $(".vipbox3").fadeIn(500);
+        })
+    })
+    $(function () {
+        $(".erweima4").click(function () {
+            $(".click4").slideDown(500);
+            $(".vipbox4").fadeIn(500);
+        })
+    })
+    $(function () {
+        $(".xiaoshi2").click(function () {
+            $(".click2").slideUp(400);
+            $(".vipbox2").fadeOut(200);
+        })
+    })
+    $(function () {
+        $(".xiaoshi3").click(function () {
+            $(".click3").slideUp(400);
+            $(".vipbox3").fadeOut(200);
+        })
+    })
+    $(function () {
+        $(".xiaoshi4").click(function () {
+            $(".click4").slideUp(400);
+            $(".vipbox4").fadeOut(200);
+        })
+    })
+    $(function () {
+        $(".xiaoshi1").click(function () {
+            $(".click1").slideUp(400);
+            $(".vipbox1").fadeOut(200);
+        })
+    })
+</script>
+
+<div class="content ">
+    <div class="popup-feedback popupvip no click1">
+        <div class="feedback vipbox1 no" style="position: relative;">
+            <p style="margin-left:20px">
+                <img src="~/Upload/UserImage/@ViewBag.userURL" style="width:60px;border-radius:30px" />
+                <label>@ViewBag.userNAME</label>
+            </p>
+            <div style="text-align: center">
+                <h1 style="text-align: center; width: 100%; height: 50px; background: #f7c684; line-height: 50px">月卡VIP</h1>
+            </div>
+            <div style="width: 150px; height: 150px; text-align: center; border: 1px solid red; padding-top: 60px; margin: 30px 30px">
+                <p>一个月</p>
+                <p style="font-weight: bolder; font-size: 20px">0.99元</p>
+            </div>
+            <p style="color: grey; margin-left: 30px">购买会员可以享受特权！</p>
+            <div style="position: absolute; right: 80px; bottom: -20px">
+                <p>
+                    选择支付方式:<span>
+                        <img src="~/img/1685433512(1).jpg" style="width: 90px; height: 50px" />
+                    </span>
+
+                </p>
+                <br />
+                <p>
+                    支付宝支付
+                    <img src="~/img/Paymentcode1.jpg" style="width: 100px; height: 100px" />
+                    <span>
+                        微信支付
+                        <img src="~/img/Paymentcode2.jpg" style="width: 100px; height: 100px" />
+                    </span>
+                </p>
+                <p style="color: red; text-align: center; font-size: 30px">0.99元</p>
+                <button type="button" class="layui-btn layui-btn-fluid xiaoshi1">@ViewBag.userVIP</button>
+            </div>
+        </div>
+    </div>
+    <div class="popup-feedback popupvip no click2">
+        <div class="feedback vipbox2 no" style="position: relative;">
+            <p style="margin-left:20px">
+                <img src="~/Upload/UserImage/@ViewBag.userURL" style="width:60px;border-radius:30px" />
+                <label>@ViewBag.userNAME</label>
+            </p>
+            <div style="text-align: center">
+                <h1 style="text-align: center; width: 100%; height: 50px; background: #f7c684; line-height: 50px">季卡VIP</h1>
+            </div>
+            <div style="width: 150px; height: 150px; text-align: center; border: 1px solid red; padding-top: 60px; margin: 30px 30px">
+                <p>三个月</p>
+                <p style="font-weight: bolder; font-size: 20px">2.88元</p>
+            </div>
+            <p style="color: grey; margin-left: 30px">购买会员可以享受特权！</p>
+            <div style="position: absolute; right: 80px; bottom: -20px">
+                <p>
+                    选择支付方式:<span>
+                        <img src="~/img/1685433512(1).jpg" style="width: 90px; height: 50px" />
+                    </span>
+
+                </p>
+                <br />
+                <p>
+                    支付宝支付
+                    <img src="~/img/Paymentcode1.jpg" style="width: 100px; height: 100px" />
+                    <span>
+                        微信支付
+                        <img src="~/img/Paymentcode2.jpg" style="width: 100px; height: 100px" />
+                    </span>
+                </p>
+                <p style="color: red; text-align: center; font-size: 30px">2.88元</p>
+                <button type="button" class="layui-btn layui-btn-fluid xiaoshi2">@ViewBag.userVIP</button>
+            </div>
+        </div>
+    </div>
+    <div class="popup-feedback popupvip no click3">
+        <div class="feedback vipbox3 no" style="position: relative;">
+            <p style="margin-left:20px">
+                <img src="~/Upload/UserImage/@ViewBag.userURL" style="width:60px;border-radius:30px" />
+                <label>@ViewBag.userNAME</label>
+            </p>
+            <div style="text-align: center">
+                <h1 style="text-align: center; width: 100%; height: 50px; background: #f7c684; line-height: 50px">年卡VIP</h1>
+            </div>
+            <div style="width: 150px; height: 150px; text-align: center; border: 1px solid red; padding-top: 60px; margin: 30px 30px">
+                <p>12个月</p>
+                <p style="font-weight: bolder; font-size: 20px">6.99元</p>
+            </div>
+            <p style="color: grey; margin-left: 30px">购买会员可以享受特权！</p>
+            <div style="position: absolute; right: 80px; bottom: -20px">
+                <p>
+                    选择支付方式:<span>
+                        <img src="~/img/1685433512(1).jpg" style="width: 90px; height: 50px" />
+                    </span>
+
+                </p>
+                <br />
+                <p>
+                    支付宝支付
+                    <img src="~/img/Paymentcode1.jpg" style="width: 100px; height: 100px" />
+                    <span>
+                        微信支付
+                        <img src="~/img/Paymentcode2.jpg" style="width: 100px; height: 100px" />
+                    </span>
+                </p>
+                <p style="color: red; text-align: center; font-size: 30px">6.99元</p>
+                <button type="button" class="layui-btn layui-btn-fluid xiaoshi3">@ViewBag.userVIP</button>
+            </div>
+        </div>
+    </div>
+    <div class="popup-feedback popupvip no click4">
+        <div class="feedback vipbox4 no" style="position: relative;">
+            <p style="margin-left:20px">
+                <img src="~/Upload/UserImage/@ViewBag.userURL" style="width:60px;border-radius:30px" />
+                <label>@ViewBag.userNAME</label>
+            </p>
+            <div style="text-align: center">
+                <h1 style="text-align: center; width: 100%; height: 50px; background: #f7c684; line-height: 50px">黄金VIP</h1>
+            </div>
+            <div style="width: 150px; height: 150px; text-align: center; border: 1px solid red; padding-top: 60px; margin: 30px 30px">
+                <p>一个月</p>
+                <p style="font-weight: bolder; font-size: 20px">1.99元</p>
+            </div>
+            <p style="color: grey; margin-left: 30px">购买会员可以享受特权！</p>
+            <div style="position: absolute; right: 80px; bottom: -20px">
+                <p>
+                    选择支付方式:<span>
+                        <img src="~/img/1685433512(1).jpg" style="width: 90px; height: 50px" />
+                    </span>
+
+                </p>
+                <br />
+                <p>
+                    支付宝支付
+                    <img src="~/img/Paymentcode1.jpg" style="width: 100px; height: 100px" />
+                    <span>
+                        微信支付
+                        <img src="~/img/Paymentcode2.jpg" style="width: 100px; height: 100px" />
+                    </span>
+                </p>
+                <p style="color: red; text-align: center; font-size: 30px">1.99元</p>
+                <button type="button" class="layui-btn layui-btn-fluid xiaoshi4">@ViewBag.userVIP</button>
+            </div>
+        </div>
+    </div>
+    <div class="top  " style="margin: 0px auto; width: 1420px; ">
+        <img src="~/img/menber.jpg" style="height: 400px; width: 1420px; margin: 0px auto; border-radius: 10px; " />
+    </div>
+    <br />
+    <div class="daohang">
+        <p>
+            <i class="layui-icon">&#xe67e;</i>
+            <label>会员充值</label>
+            <i class="layui-icon">&#xe67e;</i>
+        </p>
+    </div>
+    <br /> <hr />
+    <div class="tab-content layui-row layui-col-space15">
+        <div class="card-item active c-vip layui-col-md4" style="border:1px solid #f2d09b;border-radius:5px;">
+            <p class="t1 ">校园博客月卡会员</p>
+            <p class="t2">
+                ￥
+                <span>0.99</span>
+                /月
+            </p>
+            <p class="card-foot">积分+60</p>
+            <button type="button" class="layui-btn layui-btn-fluid erweima1">充值</button>
+        </div>
+        <div class="card-item active c-vip layui-col-md4" style="border:1px solid #f2d09b;border-radius:5px;">
+            <p class="t1">校园博客季卡会员</p>
+            <p class="t2">
+                ￥
+                <span>2.88</span>
+                /月
+            </p>
+            <p class="card-foot">积分+159</p>
+            <button type="button" class="layui-btn layui-btn-fluid erweima2">充值</button>
+        </div>
+        <div class="card-item active c-vip layui-col-md4" style="border:1px solid #f2d09b;border-radius:5px;">
+            <p class="t1">校园博客年卡会员</p>
+            <p class="t2">
+                ￥
+                <span>6.99</span>
+                /月
+            </p>
+            <p class="card-foot">积分+300</p>
+            <button type="button" class="layui-btn layui-btn-fluid erweima3">充值</button>
+        </div>
+        <div class="card-item active c-vip layui-col-md4" style="border:1px solid #f2d09b;border-radius:5px;">
+            <p class="t1">校园博客黄金会员</p>
+            <p class="t2">
+                ￥
+                <span>1.99</span>
+                /月
+            </p>
+            <p class="card-foot">积分+120</p>
+            <button type="button" class="layui-btn layui-btn-fluid erweima4">充值</button>
+        </div>
+    </div>
+    <div class="layui-clear"></div>
+    <div class="tab-box">
+        <div class="card-item active1 c-vip" style="border:1px solid #f2d09b;border-radius:5px;">
+            <p class="t3">
+                年卡限时加赠
+            </p>
+            <p class="card-foot">赠一年VIP时效</p>
+            <p class="card-foot">VIP时效延长一年，送300积分</p>
+        </div>
+        <div class="card-item active1 c-vip" style="border:1px solid #f2d09b;border-radius:5px;">
+            <p class="t3">
+                VIP会员特权
+            </p>
+            <p class="card-foot">购买付费资源享9折优惠、文档工具免费用、购实体书95折和包邮、</p>
+            <p class="card-foot">个人号推广、原创保护、VIP标识、自定义博客域名等权益</p>
+        </div>
+    </div>
+    <br /> <hr /><br />
+    <div class="guiz">
+        <p>
+            <i class="layui-icon">&#xe67e;</i>
+            <label>会员使用规则</label>
+            <i class="layui-icon">&#xe67e;</i>
+        </p>
+    </div>
+    <br />
+    <div class="guiz-text">
+        <div class="guiz-box">
+            <div class="guiz-title" style="margin-top:20px">购买VIP会员即视为同意<a>《只因会员服务协议》</a></div>
+            <div class="guiz-lable"><a href="#">【下载特权】</a>（1）VIP会员 购买成功后，在会员有效期内，VIP会员 可以免费享受以下权益：月卡 30 次、年卡 400 次、超级年卡 400 次、两年卡 800 次下载立即发放到账，含 VIP 会员专享资源下载特权和积分资源下载特权，每日下载上限为 20 个资源。<br />（2）新增福利：自 2021 年 4 月 1 日起，VIP 会员新增 <a href="#"> 折扣价格购买下载付费资源</a> 的福利，具体享受的折扣价格以付费资源页面展示为准。</div><br /><br /><br />
+            <div class="guiz-lable"><a href="#">【特别说明】：</a>（1）禁止用户使用任何方式利用本站资源为他人提供有偿下载服务，一经发现，本站有权采取包括但不限于降低单日下载次数、要求用户基于身份证等信息进行实名认证、冻结、取消或查封账号、等措施中的一种或多种措施。<br />（2）账号异常下载包括同一 IP 多个账号多次下载等情形，一经发现将采取暂停相关用户下载权益、降低单日下载次数、要求用户基于身份证等信息进行实名认证等方式中的一种或多种措施，若账号被多次出现异常，则CSDN有权冻结、取消或查封账号。</div><br /><br /><br /><br /><br />
+            <div class="guiz-title">续费说明</div>
+            <div class="guiz-lable">1. 会员到期后，将自动取消会员身份及权益，下载次数将清零。</div>
+            <div class="guiz-lable">2. VIP会员有效期内续费8折优惠，在会员有效期内续费，会员权益会自动叠加，未使用完下载次数将累加。</div>
+            <div class="guiz-lable">3. 如何取消微信自动续费：打开微信-我-“支付”，进入页面后点击右上角三个点“...”，点击“扣费服务”，进入服务名称页面，点击服务名称，关闭服务后可取消签约。</div>
+        </div>
+    </div>
+    <div class="top  " style="margin: 0px auto; width: 1420px; ">
+        <img src="~/img/dibu.png" style="height: 100px; width: 1420px; margin: 0px auto; border-radius: 10px; " />
+    </div>
+
+</div>
+

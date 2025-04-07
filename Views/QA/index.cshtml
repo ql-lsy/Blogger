@@ -1,0 +1,156 @@
+﻿
+@{
+    ViewBag.Title = "index";
+    Layout = "~/Views/Shared/Home.cshtml";
+}
+<link href="~/Content/css/Seek_help.css" rel="stylesheet" />
+<style>
+
+    #app {
+        width: 60%
+    }
+
+    .layui-nav {
+        background-color: #fff
+    }
+
+    .Re-title {
+        font-size: 25px;
+        height: 50px;
+        line-height: 50px;
+        padding: 0px 30px;
+        margin: 10px 0px
+    }
+
+    .Re-time {
+        font-size: 18px;
+        height: 30px;
+        line-height: 30px;
+        padding: 0px 30px;
+    }
+
+    .Re-Qa p {
+        color: #000000;
+        font-size: 30px;
+        padding: 10px 30px;
+    }
+
+    .Re-details {
+        font-size: 22px;
+        color: #000000;
+        padding: 10px 30px;
+    }
+
+    .name {
+        margin: 0px 0px 0px 10px
+    }
+
+    .Concern {
+        margin: -40px 0px 0px 390px;
+        padding: 0px 10px
+    }
+
+    .tichu-qa #IssueContent {
+        height: 40px;
+        line-height: 40px;
+        width: 260px;
+        margin: 20px 0px
+    }
+
+    #Issuedetails {
+        height: 100px;
+        line-height: 40px;
+        width: 260px;
+        margin: 10px 0px
+    }
+
+    .di {
+        margin-bottom: 10px
+    }
+
+    .top {
+        margin-top: 10px
+    }
+</style>
+
+<div class="layui-row layui-col-space15">
+    <div class="layui-col-md14">
+
+        <div class="layui-panel">
+            <div class="Re-title">
+                <p>问题：@ViewBag.content </p>
+            </div>
+        </div>
+        <div class="layui-panel">
+            <div class="Re-Qa">
+                <p>
+                    <img src="~/Upload/UserImage/@ViewBag.userURL" width="70" style="border-radius:30px;margin:10px" />@ViewBag.userNAME <span> 提出的问题</span>
+                </p>
+            </div>
+        </div>
+        <div class="layui-panel">
+            <div class="Re-time">
+                <p>提出时间:  @ViewBag.time</p>
+            </div>
+        </div>
+        <div class="layui-panel">
+            <div class="Re-details">
+                <p>问题详情：  @ViewBag.Issuedetails<span></span></p>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="layui-col-md7">
+        <div class="layui-panel">
+            <div style="padding: 15px;">@ViewBag.num 个回答</div>
+        </div>
+
+
+        @foreach (var item in ViewData["re"] as List<Blogger.Models.Reply>)
+        {
+            <div class="layui-panel top">
+                <div style="padding: 20px;">
+                    <div class="name">
+                        <p>匿名回答：@item.ReplyContent</p>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-panel">
+                <div style="padding: 15px;">
+                    <a href="/QA/delete?ReplyID=@item.ReplyID&&IssueID=@item.IssueID
+                                                  &&IssueDateTime= @ViewBag.time
+                                                  &&Issuedetails=@ViewBag.Issuedetails
+                                                  &&IssueQuantity=@ViewBag.num
+                                                  &&IssueContent=@ViewBag.content ">删除评论</a>
+                </div>
+            </div>
+            <div class="layui-panel di">
+                <div style="padding: 15px;">
+                    <p>编辑于（@item.ReplyTime）</p>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="layui-col-md5">
+        @Html.Partial("insertRe")
+        <div class="layui-panel">
+            <div style="height: 80px " class="QA-3">
+                <a href="/QA/Mproblem">
+                    <img src="~/UpLoad/UserImage/@ViewBag.userURL" width="60" style="border-radius:30px;margin:10px" />查看我的问题
+                </a>
+            </div>
+        </div>
+        <div class="layui-panel" style=" margin: 10px 0px">
+            <div style="padding:10px;">
+            </div>
+        </div>
+        <div class="layui-panel">
+            <a href="#">
+                <img src="~/img/广告QA.png"style="width:100%"/>
+            </a>
+        </div>
+    </div>
+
+</div>
+

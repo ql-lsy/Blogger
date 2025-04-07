@@ -1,0 +1,98 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>校园博客网</title>
+    @*需要先引入jQuery文件*@
+    <script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+    <link href="~/Content/bootstrap.css" rel="stylesheet" />
+    <script src="~/Scripts/bootstrap.js"></script>
+
+    @*引入layui*@
+    <link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+    <script src="~/Content/layui/layui.js"></script>
+
+    @*引入css与js*@
+    <link href="~/Content/css/my-Global.css" rel="stylesheet" />
+    <link href="~/Content/css/Home-css1.css" rel="stylesheet" />
+    <script src="~/Scripts/JS/Home_js.js"></script>
+
+
+</head>
+<body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top Home-head Home-none Home-flex-start" role="navigation">
+        <i class="fa fa-name-shape-o-direction Home-none logo">
+            @*logo位置*@
+            @*<img src="~/img/logo.png" />*@
+        </i>
+        <ul class="layui-nav Home-none Home-flex Home-ul" lay-filter="">
+            <li id="Home-Blogger" class="layui-nav-item Home-none">首页</li>
+            <li id="Home-Download" class="layui-nav-item Home-none">资源</li>
+            <li id="Home-Learn" class="layui-nav-item Home-none">校园活动</li>
+            @*<li id="Home-Community" class="layui-nav-item Home-none">社区</li>*@
+            <li id="Home-Seek_help" class="layui-nav-item Home-none">论坛</li>
+        </ul>
+        <span class="input-group-btn Home-Search-btn Home-flex">
+            <input type="text" name="Home-Search" id="Home-input-Search" class="form-control" value="" placeholder="搜索一下"
+                   required="required" pattern="" title="">
+            <button type="button" id="Home-input-Btn" class="layui-btn layui-btn-primary">
+                <i class="glyphicon glyphicon-search" style="font-size:14px;position:relative;top:1.5px;left:-1px"></i>
+                Go!
+            </button>
+        </span>
+        <ul id="Search_Box">
+           
+        </ul>
+        <ul class="layui-nav Home-none Home-flex Home-ul Home-ul-box">
+            <li id="Home-Member" class="layui-nav-item Home-none">会员中心</li>
+            <li id="Home-Creation" class="layui-nav-item Home-none">创作中心</li>
+            <li id="Home-Login" class="layui-nav-item Home-none">登录</li>
+            <li id="Home-Message" class="layui-nav-item  Home-none">消息</li>
+            <li id="Home-Personal_Data" class="layui-nav-item  Home-none">
+
+                <a id="Personal_Data_Image" title="name">
+                    <img class="Home_UserImage" src="~/Upload/UserImage/wsz.png" />
+                </a>
+                <div id="Home_UserBox" style="display:none">
+                    <dl style="display:none" class="layui-nav-child">
+
+                        <dd>
+                            <a href="../Home/Personal_Data"><img class="Home_UserImage" src="~/Upload/UserImage/wsz.png" /></a>
+                        </dd>
+                        <dd><span id="Home_Name" style="text-align: center;width:50% ">Name</span><span class="layui-badge layui-bg-blue" style="font-size: 0.5em; height: 12px; line-height: 12px;position:relative;top:-1.5px;"><i class="layui-icon layui-icon-rate-solid" style="font-size: 1em;line-height:12px;"></i><span id="Home_LV" style="font-size: 1em;line-height:12px;">LV0</span></span></dd>
+                        <dd><span id="Home_Lable" style="font-size:0.8em;">个性签名</span></dd>
+
+                        <dd id="Home_Close" style="text-align: center;"><a href="#"><i class="layui-icon layui-icon-logout"></i>退出</a></dd>
+                    </dl>
+                </div>
+
+            </li>
+        </ul>
+    </nav>
+
+
+
+    <div id="app">
+        <!--记录开始-->
+        @RenderBody()
+        <!--记录结束-->
+    </div>
+
+    <div style="display:none;transition:1s;z-index:999999999;position:fixed" id='mouseXY'> <img style="height:8px;width:8px;" src="~/img/cxk.png" /></div>
+
+
+
+    <!--验证是否以及登录-->
+    <script src="~/Scripts/JS/Home_LoginConfirm.js"></script>
+
+    <!--页面切换-->
+    <script src="~/Scripts/JS/Home_Handoff.js"></script>
+    <!-- body 末尾处引入 layui -->
+    <!--签到-->
+    <script src="~/Scripts/JS/Home_Sign.js"></script>
+    <script src="~/Scripts/JS/Home_guanggao.js"></script>
+</body>
+</html>

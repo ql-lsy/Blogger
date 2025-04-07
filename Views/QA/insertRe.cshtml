@@ -1,0 +1,13 @@
+﻿<div class="layui-panel">
+    <div style="padding: 15px;">
+        <p class="IssueContent">
+            <label>写下你的回答，<br />准确的描述更容易让人理解你的回答。</label>
+        </p>
+        @using (Html.BeginForm())
+        {
+            <input type="text" value="请输入你的回答" id="Issuedetails" name="ReplyContent" />
+            <input type="submit" value="发布回答" class="layui-btn layui-btn-normal" />
+        }
+    </div>
+</div>
+

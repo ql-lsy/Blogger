@@ -1,0 +1,112 @@
+﻿
+@{
+    ViewBag.Title = "Seek_help";
+    Layout = "~/Views/Shared/Home.cshtml";
+}
+<link href="~/Content/css/Seek_help.css" rel="stylesheet" />
+<style>
+    .tichu-qa {
+        height: 30px;
+        line-height: 30px;
+        margin: 0px auto;
+        padding: 20px
+    }
+
+        .tichu-qa #IssueContent {
+            height: 40px;
+            line-height: 40px;
+            width: 260px;
+            margin: 20px 0px
+        }
+
+    #Issuedetails {
+        height: 100px;
+        line-height: 40px;
+        width: 260px;
+        margin: 10px 0px
+    }
+
+    .QA-3:hover {
+        background-color: #dcdcdc
+    }
+</style>
+<div class="layui-row layui-col-space12 content">
+    <div class="layui-col-md8">
+        <div class="layui-panel">
+            <div class="QA-recommend content-title"><div><i class="layui-icon">&#xe67a;</i>为你推荐</div></div>
+        </div>
+        @foreach (var item in ViewBag.QA as List<Blogger.Models.Issue>)
+        {
+            <div class="layui-panel " lay-allowClose="true">
+                <div style="padding: 30px;" class="list-QA layui-row">
+                    <div style="float:left" class="layui-col-md8">
+                        <p class="QA-1">发布时间：@item.IssueDateTime 期待你的回答</p>
+                        <p style="height: 30px; line-height: 30px">问题：@item.IssueID.@item.IssueContent</p>
+                        <text style="height: 20px; line-height: 20px">问题详情： @item.Issuedetails</text>
+                        <p>试试帮他解答~ · @item.IssueQuantity 回答· </p>
+                    </div>
+                    <div class="layui-col-md4">
+                        <a href="/QA/index?IssueID=@item.IssueID
+                                                  &&UserID=@item.UserID
+                                                  &&IssueDateTime=@item.IssueDateTime
+                                                  &&Issuedetails=@item.Issuedetails
+                                                  &&IssueQuantity=@item.IssueQuantity
+                                                  &&IssueContent=@item.IssueContent" class="btn-QA"><i class="layui-icon " style="font-size:25px">&#xe642;</i>写回答</a>
+                    </div>
+                    <div class="layui-clear"></div>
+                </div>
+            </div>
+        }
+    </div>
+    <div class="layui-col-md4">
+        <div class="layui-panel">
+            <div style="height: 80px ">
+                <h1 class="QA-2">
+                    开始创作
+                </h1>
+            </div>
+        </div>
+        <div class="layui-panel" style=" margin: 10px 0px">
+            <div style="padding:10px;">
+            </div>
+        </div>
+        <div class="layui-panel">
+            <div style="height: 80px " class="QA-3">
+                <a href="/QA/Mproblem">
+                    <img src="~/UpLoad/UserImage/@ViewBag.userURL" width="60" style="border-radius:30px;margin:10px" />查看我的问题
+                </a>
+            </div>
+        </div>
+        <div class="layui-panel" style=" margin: 10px 0px">
+            <div style="padding:10px;">
+            </div>
+        </div>
+        <div class="layui-panel">
+            <div style="height:450px ;margin:20px 0px">
+                <div style="margin:20px 10px">  <img src="~/img/1684980273(1).jpg" width="300" /></div>
+                <div class="tichu-qa">
+                    <p class="IssueContent">
+                        <label>写下你的问题，<br />准确的描述问题更容易得到解答。</label>
+                    </p>
+                    @using (Html.BeginForm())
+                    {
+                        <input type="text" value="请输入你的问题" id="IssueContent" name="IssueContent" />
+                        <input type="text" value="请输入你的问题详情" id="Issuedetails" name="Issuedetails" />
+                        <input type="submit" value="提交问题" class="layui-btn layui-btn-normal" />
+                    }
+                </div>
+            </div>
+
+        </div>
+        <div class="layui-panel" style=" margin: 10px 0px">
+            <div style="padding:10px;">
+            </div>
+        </div>
+        <div class="layui-panel">
+            <a href="#">
+                <img src="~/img/广告QA.png" style="width:100%" />
+            </a>
+        </div>
+    </div>
+</div>
+

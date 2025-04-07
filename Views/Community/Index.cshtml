@@ -1,0 +1,377 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Home.cshtml";
+}
+
+@*需要先引入jQuery文件*@
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.js"></script>
+
+@*需要先引入jQuery文件*@
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<script src="~/Scripts/bootstrap.js"></script>
+
+@*引入layui*@
+<link href="~/Content/layui/css/layui.css" rel="stylesheet" />
+<script src="~/Content/layui/layui.js"></script>
+
+@*引入css与js*@
+<link href="~/Content/css/my-Global.css" rel="stylesheet" />
+<link href="~/Content/css/Home-css1.css" rel="stylesheet" />
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+
+    .bar, .second li {
+        width: 150px;
+        height: 50px;
+        background-color: grey;
+    }
+
+        .bar:hover {
+            background-color: grey;
+        }
+
+        .bar p {
+            text-align: center;
+            line-height: 50px;
+        }
+
+    .second {
+        display: none;
+    }
+
+        .second ul {
+            list-style: none;
+        }
+
+        .second li:hover {
+            background-color: wheat;
+        }
+
+        .second p {
+            text-align: center;
+            line-height: 30px;
+        }
+
+    .btnjoin {
+        color: #555666;
+        background-color: #fff;
+        border-radius: 12px;
+        margin-left: 192px;
+        border: 1px solid #ccccd8;
+        width: 48px;
+        overflow: hidden;
+        -ms-flex-negative: 0;
+        flex-shrink: 0;
+        outline: none;
+        align-self: center;
+        height: 24px;
+        margin-top: -10px;
+        font-weight: 400;
+    }
+
+    dd {
+        display: block;
+        width: 100%;
+        line-height: 40px;
+        padding-left: 20px;
+    }
+</style>
+<script type="text/javascript">
+    $(function () {
+        $.ajax({
+            type: "Get",
+            url: "/Api/ApiCommunity",
+            success: function (res) {
+                if (res) {
+                    for (var j = 0; j < res.length; j++) {
+
+                        var a = document.getElementById("second2");
+                        var newDiv = document.createElement("dd");
+                        //newDiv.id = res[i].hid;
+                        a.appendChild(newDiv);
+                        newDiv.innerHTML = res[j].CommunityName1;
+                        //添加点击事件监听器
+                        newDiv.addEventListener("click", function () {
+                            var commutityid = this.id;
+                            console.log(commutityid);
+                            Show(commutityid);
+                        })
+                    }
+                } else {
+                    alert("n");
+                }
+            }
+        })
+    });
+    function Show(commutityid) {
+        var divID = document.getElementById("divID");
+        divID.innerHTML = "";
+        commutityid = commutityid;
+        if (commutityid == commutityid) {
+            $.ajax({
+                type: "Get",
+                url: "/Api/ApiCommuni",
+                //如何获取社区的id
+                data: { CommunityID: 2 },
+                success: function (res) {
+
+                    for (var j = 0; j < res.length; j++) {
+
+                        divID.innerHTML += '<div style="width:950px; height:70px; padding:5px;">'
+                            + '<span>' + '<img src="../img/as.jpg" style="border-radius:50%; height:50px;border:1px solid black" />'
+                            + '<a href="#" style="margin-left:5px;">' + res[j].UserName + '</a>' + '<span style="margin-left:5px;">' + '</span>' + '</span>'
+                            + ' <p style="position:relative;top:-20px;left:50px">' + "博客内容" + '：' + res[j].BlogContent + ' <p style="position:relative;top:-20px;left:50px">' + res[j].LastTime + '<hr/>';
+
+
+                    }
+                }
+            })
+        }
+    }
+
+    var lisuoy = 10;
+    var d = document.getElementsByTagName('dd'); // 获取所有li元素
+    //divID.innerHTML = "";
+    for (var i = 0; i < d.length; i++) {
+        d[i].index = i; // 为第i个li元素添加一个index属性，赋值为i
+        d[i].addEventListener('click', function () {
+            lisuoy = (this.index);
+            if (lisuoy == 10) {
+                var divID = document.getElementById("divID");
+                divID.innerHTML = "";
+                $.ajax({
+                    type: "Get",
+                    url: "/Api/ApiCommuni",
+                    data: { CommunityID: lisuoy },
+                    success: function (res) {
+                        for (var j = 0; j < res.length; j++) {
+                            divID.innerHTML += res[j].name;
+                        }
+                    }
+                })
+            }
+        });
+    }
+</script>
+
+
+
+
+
+
+
+
+@using Blogger.Models
+<div class="layui-layout layui-layout-admin" s>
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                @*<li class="layui-nav-item layui-nav-itemed">
+                        <a class="" href="javascript:;" id="bar">社区</a>
+                        <dl class="layui-nav-child" id="second" >
+                            @foreach (var item in ViewData["Community"] as List<Community>)
+                            {
+                                <dd>@item.CommunityName</dd>
+                            }
+                        </dl>
+                    </li>*@
+                <li class="layui-nav-item">
+                    <a href="javascript:;" id="bar2">我加入的社区</a>
+                    <dl class="layui-nav-child" id="second2">
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div class="layui-body" style="padding: 15px; width: 1000px; height: 800px; overflow: scroll;">
+        <!-- 内容主体区域 -->
+
+        <div class="layui-card-body" style="" id="divID">
+           
+        </div>
+
+        <br><br>
+
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            底部固定区域
+        </div>
+    </div>
+    @*右侧导航栏*@
+    <div class="layui-side layui-bg-black" style="margin-left:1200px;width:330px">
+        <div class="layui-btn-container">
+            <button type="button" class="layui-btn layui-btn-primary" lay-on="test-tips-prompt-0" style="width:300px;height:50px;line-height:50px;text-align:center;background-color:orange">创建社区</button>
+        </div>
+        @*<div style="width:300px;height:50px;line-height:50px;text-align:center;background-color:orange">创建社区</div>*@
+        <div class="layui-tab layui-tab-brief" lay-filter="docDemoTabBrief">
+            <ul class="layui-tab-title">
+                <li class="layui-this">推荐社区</li>
+                <li>社区</li>
+            </ul>
+            <div class="layui-tab-content" style="height: 1000px;">
+                <div class="layui-tab-item layui-show">
+                    @*推荐社区*@
+                    <div style="border: 1px solid red; width: 500px; height: 50px; margin: 5px; padding: 5px ">
+                        <div>
+                            <img src="~/img/1.png.png" style="width: 40px; height: 40px; float: left;" />
+                        </div>
+                        <div style="padding-left:20px">
+                            <p>锐官网</p>
+                        </div>
+                        <div>
+                            <button class="btnjoin buttonq" onclick="join()">加入</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-tab-item">
+                    @*我的社区*@
+                    @foreach (var item in ViewData["Community"] as List<Community>)
+                    {
+                        <div style="border: 1px solid red; width: 500px; height: 50px; margin: 5px; padding: 5px ">
+                            <div>
+                                <img src="~/img/1.png.png" style="width: 40px; height: 40px; float: left;" />
+                            </div>
+                            <div style="padding-left:20px">
+                                <p>@item.CommunityName</p>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function join() {
+        alert("123");
+        var lisuoy = 1;
+        var d = document.getElementsByClassName('buttonq');
+        console.log(d);
+        //divID.innerHTML = "";
+        for (var i = 0; i < d.length; i++) {
+            d[i].index = i; // 为第i个li元素添加一个index属性，赋值为i
+            d[i].addEventListener('click', function () {
+
+                lisuoy = (this.index);
+                /*if (lisuoy == 0) {*/
+                CommunityName = "锐官网";
+                alert("qwe");
+                $.ajax({
+                    type: "Get",
+                    url: "/api/ApiInsertcommunity",
+                    data: { CommunityName: CommunityName },
+                    dataType: "json",
+                    success: function (res) {
+                        alert("1");
+                    }
+                })
+                //}
+            });
+        }
+    }
+
+</script>
+<script>
+    //注意：导航 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function () {
+        var element = layui.element;
+    });
+</script>
+
+<script>
+    layui.use(function () {
+        var layer = layui.layer;
+        var util = layui.util;
+        // 事件
+        util.on('lay-on', {
+            'test-tips-tab': function () {
+                layer.tab({
+                    area: ['600px', '300px'],
+                    tab: [{
+                        title: 'Title 1',
+                        content: '<div style="padding: 16px;">tabs content 111</div>'
+                    }, {
+                        title: 'Title 2',
+                        content: '<div style="padding: 16px;">tabs content 222</div>'
+                    }, {
+                        title
+                            : 'Title 3',
+                        content: '<div style="padding: 16px;">tabs content 333</div>'
+                    }],
+                    shadeClose: true
+                });
+            },
+            'test-tips-prompt-0': function () {
+                layer.prompt({ title: '社区名称' }, function (value, index, elem) {
+                    if (value === '') return elem.focus();
+
+                    var test = window.location.search;
+                    test = test.substring(test.indexOf("=") + 1, test.length);
+                    CommunityName = util.escape(value);
+                    $.ajax({
+                        type: "Get",
+                        url: "/api/ApiInsertcommunity",
+                        dataType: "json",
+                        data: { CommunityName: CommunityName },
+                        success: function (res) {
+                        }
+                    });
+                    layer.msg('获得：' + util.escape(value)); // 显示 value
+                    // 关闭 prompt
+                    layer.close(index);
+                });
+            }
+        })
+    });
+</script>
+<script>
+    //JS
+    layui.use(['element', 'layer', 'util'], function () {
+        var element = layui.element;
+        var layer = layui.layer;
+        var util = layui.util;
+        var $ = layui.$;
+        //头部事件
+        util.event('lay-header-event', {
+            menuLeft: function (othis) { // 左侧菜单事件
+                layer.msg('展开左侧菜单的操作', { icon: 0 });
+            },
+            menuRight: function () {  // 右侧菜单事件
+                layer.open({
+                    type: 1
+                    , title: '更多'
+                    , content: '<div style="padding: 15px;">处理右侧面板的操作</div>'
+                    , area: ['260px', '100%']
+                    , offset: 'rt' //右上角
+                    , anim: 'slideLeft'
+                    , shadeClose: true
+                    , scrollbar: false
+                });
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $("#bar").click(function () {
+            $("#second").slideToggle("slow");
+        })
+        $("#bar2").click(function () {
+            $("#second2").slideToggle("slow");
+        })
+    });
+</script>
+
+
+
+
